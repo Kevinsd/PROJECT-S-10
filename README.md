@@ -1,4 +1,4 @@
-# Project Name
+# PUZZLE BUBBLE
 
 TODO: Write a project description
 
