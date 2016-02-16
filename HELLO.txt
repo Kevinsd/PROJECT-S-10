@@ -2,7 +2,7 @@
 
 int main() {
 
-	printf("Hello from Kevin.\n");
+	printf("Hello from Kevin, how are you my old friends?.\n");
 
 	system("pause");
 	return 0;
