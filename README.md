@@ -1,6 +1,6 @@
 # PUZZLE BUBBLE
 
-TODO: Write a project description
+TODO: Puzzle Bubble it's a very amazing project created by UPC students.
 
 ## Installation
 
