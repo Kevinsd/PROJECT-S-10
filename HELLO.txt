@@ -4,7 +4,7 @@ int main() {
 
 	printf("Hello from Kevin, how are you my old friends?\n");
 	printf("Hello from Sergi, I'm fine, where is Joel?\n");
-	printf("Hello from Jose, I'm fine, where i me\n");
+	printf("Hello from Jose, I'm fine, where i'm\n");
         printf("Hello from Joel, I'm here\n");
 
 	system("pause");
