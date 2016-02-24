@@ -1,4 +1,4 @@
-# PUZZLE BUBBLE
+# PUZZLE BOBBLE
 
 TODO: Puzzle Bubble it's a very amazing project created by UPC students.
 
