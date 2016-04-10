@@ -42,6 +42,12 @@ update_status ModuleFadeToBlack::Update()
 			
 				moduleOff->Disable();
 				moduleOn->Enable();
+				//NOmoduleOff->Enable();
+				//NOmoduleOn->Disable();
+				
+				//moduleOn->Enable();
+				//moduleOff->Disable();
+
 
 				// ---
 				total_time += total_time;

@@ -7,11 +7,11 @@
 
 struct SDL_Texture;
 
-class ModuleSceneKen : public Module
+class ModuleSceneLevel : public Module
 {
 public:
-	ModuleSceneKen();
-	~ModuleSceneKen();
+	ModuleSceneLevel();
+	~ModuleSceneLevel();
 
 	bool Start();
 	update_status Update();

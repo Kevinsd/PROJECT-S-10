@@ -2,14 +2,14 @@
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
-#include "ModuleSceneKen.h"
-#include "ModuleSceneHonda.h"
+#include "ModuleSceneLevel.h"
+#include "ModuleSceneMenu.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModulePlayer.h"
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
-ModuleSceneKen::ModuleSceneKen()
+ModuleSceneLevel::ModuleSceneLevel()
 {
 	// ground
 	ground.x = 8;
@@ -24,10 +24,10 @@ ModuleSceneKen::ModuleSceneKen()
 	foreground.h = 181;
 
 	// Background / sky
-	background.x = 72;
-	background.y = 208;
-	background.w = 768;
-	background.h = 176;
+	background.x = 0;
+	background.y = 0;
+	background.w = 640;
+	background.h = 480;
 
 	// flag animation
 	flag.PushBack({848, 208, 40, 40});
@@ -46,15 +46,15 @@ ModuleSceneKen::ModuleSceneKen()
 	forward = true;
 }
 
-ModuleSceneKen::~ModuleSceneKen()
+ModuleSceneLevel::~ModuleSceneLevel()
 {}
 
 // Load assets
-bool ModuleSceneKen::Start()
+bool ModuleSceneLevel::Start()
 {
 	LOG("Loading ken scene");
 	
-	graphics = App->textures->Load("coche detrass.png");
+	graphics = App->textures->Load("Menu.png");
 
 	// TODO 1: Enable (and properly disable) the player module
 	App->player->Enable();
@@ -63,7 +63,7 @@ bool ModuleSceneKen::Start()
 }
 
 // UnLoad assets
-bool ModuleSceneKen::CleanUp()
+bool ModuleSceneLevel::CleanUp()
 {
 	LOG("Unloading ken scene");
 	App->player->Disable();
@@ -72,7 +72,7 @@ bool ModuleSceneKen::CleanUp()
 }
 
 // Update: draw background
-update_status ModuleSceneKen::Update()
+update_status ModuleSceneLevel::Update()
 {
 	// Calculate boat Y position -----------------------------
 	if(foreground_pos < -6.0f)
@@ -86,19 +86,19 @@ update_status ModuleSceneKen::Update()
 		foreground_pos += 0.02f;
 
 	// Draw everything --------------------------------------
-	App->render->Blit(graphics, 0, 0, &background, 0.75f); // sea and sky
-	App->render->Blit(graphics, 560, 8, &(flag.GetCurrentFrame()), 0.75f); // flag animation
+	App->render->Blit(graphics, 0, 0, &background); // sea and sky
+/*	App->render->Blit(graphics, 560, 8, &(flag.GetCurrentFrame()), 0.75f); // flag animation
 
 	App->render->Blit(graphics, 0, (int)foreground_pos, &foreground, 0.92f);
 	App->render->Blit(graphics, 192, 104 + (int)foreground_pos, &(girl.GetCurrentFrame()), 0.92f); // girl animation
 	
 	App->render->Blit(graphics, 0, 170, &ground);
-
+	*/
 	// TODO 3: make so pressing SPACE the HONDA stage is loaded
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
 	{
-		App->fade->FadeToBlack(App->scene_ken, App->scene_honda, 1.0f);
+		App->fade->FadeToBlack(App->scene_level, App->scene_menu, 1.0f);
 	}
 	return UPDATE_CONTINUE;
 }
