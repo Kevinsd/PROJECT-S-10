@@ -35,7 +35,7 @@ bool ModuleSceneMenu::Start()
 {
 	LOG("Loading background assets");
 	bool ret = true;
-	graphics = App->textures->Load("Level.png");
+	graphics = App->textures->Load("Menu.png");
 
 	// TODO 1: Enable (and properly disable) the player module
 	App->player->Enable();
@@ -56,7 +56,11 @@ update_status ModuleSceneMenu::Update()
 {
 	// Draw everything --------------------------------------	
 	//App->render->Blit(graphics, 0, 0, &ground);
-	App->render->Blit(graphics, 0, 0, &background); // back of the room
+	App->render->Blit(graphics, 0, 0, &background); 
+	
+	
+	
+	// back of the room
 	/*
 	App->render->Blit(graphics, 280, 125, &foreground);
 	App->render->Blit(graphics, 305, 136, &(water.GetCurrentFrame())); // water animation

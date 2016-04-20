@@ -11,11 +11,19 @@
 
 ModuleSceneLevel::ModuleSceneLevel()
 {
+	one_ball = new Ball(320,300,16,BLUE);
+
+	//Balls
+
+	ballrect = { 20, 516, 32, 32 };
+
 	// ground
 	ground.x = 8;
 	ground.y = 391;
 	ground.w = 896;
 	ground.h = 72;
+
+
 
 	// foreground
 	foreground.x = 8;
@@ -47,15 +55,18 @@ ModuleSceneLevel::ModuleSceneLevel()
 }
 
 ModuleSceneLevel::~ModuleSceneLevel()
-{}
+{
+	delete one_ball;
+}
+
 
 // Load assets
 bool ModuleSceneLevel::Start()
 {
 	LOG("Loading ken scene");
 	
-	graphics = App->textures->Load("Menu.png");
-
+	graphics = App->textures->Load("Level.png");
+	graphics_ball = App->textures->Load("spritesbuenos.png");
 	// TODO 1: Enable (and properly disable) the player module
 	App->player->Enable();
 	
@@ -86,7 +97,9 @@ update_status ModuleSceneLevel::Update()
 		foreground_pos += 0.02f;
 
 	// Draw everything --------------------------------------
-	App->render->Blit(graphics, 0, 0, &background); // sea and sky
+	App->render->Blit(graphics, 0, 0, &background);
+	App->render->Blit(graphics_ball, one_ball->x-16, one_ball->y-16, &ballrect);
+	// sea and sky
 /*	App->render->Blit(graphics, 560, 8, &(flag.GetCurrentFrame()), 0.75f); // flag animation
 
 	App->render->Blit(graphics, 0, (int)foreground_pos, &foreground, 0.92f);
@@ -96,9 +109,11 @@ update_status ModuleSceneLevel::Update()
 	*/
 	// TODO 3: make so pressing SPACE the HONDA stage is loaded
 
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN)
 	{
-		App->fade->FadeToBlack(App->scene_level, App->scene_menu, 1.0f);
+		one_ball->moving = true;
 	}
+	if (one_ball->moving) 
+		one_ball->Move();
 	return UPDATE_CONTINUE;
 }

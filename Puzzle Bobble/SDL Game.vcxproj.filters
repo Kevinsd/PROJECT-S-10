@@ -56,6 +56,9 @@
     <ClInclude Include="ModuleSceneLevel.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="Ball.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -90,6 +93,9 @@
     </ClCompile>
     <ClCompile Include="ModuleSceneLevel.cpp">
       <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Ball.cpp">
+      <Filter>Containers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
