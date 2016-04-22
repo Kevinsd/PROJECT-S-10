@@ -16,7 +16,7 @@ void Ball::Move()
 {
 
 	
-	
+	  
 		y -= velocity;
 	
 	if (y <= 64)
