@@ -7,6 +7,7 @@
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModulePlayer.h"
+
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
 ModuleSceneLevel::ModuleSceneLevel()
@@ -15,7 +16,7 @@ ModuleSceneLevel::ModuleSceneLevel()
 
 	//Balls
 
-	ballrect = { 20, 516, 32, 32 };
+	ballsprite = { 20, 516, 32, 32 };
 
 	// ground
 	ground.x = 8;
@@ -86,34 +87,65 @@ bool ModuleSceneLevel::CleanUp()
 update_status ModuleSceneLevel::Update()
 {
 	// Calculate boat Y position -----------------------------
-	if(foreground_pos < -6.0f)
+	if (foreground_pos < -6.0f)
 		forward = false;
-	else if(foreground_pos > 0.0f)
+	else if (foreground_pos > 0.0f)
 		forward = true;
-	
-	if(forward)
+
+	if (forward)
 		foreground_pos -= 0.02f;
 	else
 		foreground_pos += 0.02f;
 
 	// Draw everything --------------------------------------
 	App->render->Blit(graphics, 0, 0, &background);
-	App->render->Blit(graphics_ball, one_ball->x-16, one_ball->y-16, &ballrect);
+	App->render->Blit(graphics_ball, one_ball->x - 16, one_ball->y - 16, &ballsprite);
 	// sea and sky
-/*	App->render->Blit(graphics, 560, 8, &(flag.GetCurrentFrame()), 0.75f); // flag animation
+	/*	App->render->Blit(graphics, 560, 8, &(flag.GetCurrentFrame()), 0.75f); // flag animation
 
-	App->render->Blit(graphics, 0, (int)foreground_pos, &foreground, 0.92f);
-	App->render->Blit(graphics, 192, 104 + (int)foreground_pos, &(girl.GetCurrentFrame()), 0.92f); // girl animation
+		App->render->Blit(graphics, 0, (int)foreground_pos, &foreground, 0.92f);
+		App->render->Blit(graphics, 192, 104 + (int)foreground_pos, &(girl.GetCurrentFrame()), 0.92f); // girl animation
+
+		App->render->Blit(graphics, 0, 170, &ground);
+		*/
+	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT)
+	{
+
+		one_ball->moving_left = true;
+
+		if (one_ball->moving_left)
+
+			one_ball->Move();
+
+
+		//one_ball->x += 1;
+
+
+	}
+
+	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_REPEAT)
+	{
+
+		one_ball->moving_right = true;
 	
-	App->render->Blit(graphics, 0, 170, &ground);
-	*/
-	// TODO 3: make so pressing SPACE the HONDA stage is loaded
+		if (one_ball->moving_right)
+			
+			one_ball->Move();
+		
+
+		//one_ball->x += 1;
+
+	
+	}
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN)
 	{
 		one_ball->moving = true;
 	}
-	if (one_ball->moving) 
+	if (one_ball->moving)
+		
 		one_ball->Move();
+
+
 	return UPDATE_CONTINUE;
 }

@@ -1,5 +1,5 @@
-#ifndef __MODULESCENEKEN_H__
-#define __MODULESCENEKEN_H__
+#ifndef __MODULESCENELEVEL_H__
+#define __MODULESCENELEVEL_H__
 
 #include "Module.h"
 #include "Animation.h"
@@ -22,7 +22,7 @@ public:
 	Ball* one_ball=nullptr;
 	SDL_Texture* graphics_ball = nullptr;
 	SDL_Texture* graphics = nullptr;
-	SDL_Rect ballrect;
+	SDL_Rect ballsprite;
 	SDL_Rect ground;
 	SDL_Rect foreground;
 	SDL_Rect background;
@@ -33,4 +33,4 @@ public:
 	bool forward;
 };
 
-#endif // __MODULESCENEKEN_H__
+#endif // __MODULESCENELEVEL_H__

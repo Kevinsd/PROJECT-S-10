@@ -4,14 +4,15 @@
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
+#include "Ball.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
 ModulePlayer::ModulePlayer()
 {
 	/*position.x = 100;
-	position.y = 220;*/
-
+	position.y = 220;
+	*/
 	
 
 }
