@@ -31,28 +31,36 @@ ModuleSceneLevel::ModuleSceneLevel()
 	foreground.y = 24;
 	foreground.w = 521;
 	foreground.h = 181;
-
+	
 	// Background / sky
 	background.x = 0;
 	background.y = 0;
 	background.w = 640;
 	background.h = 480;
+	
+	// Launcher Animation
+	launcher.PushBack({ 624, 16, 32, 56 });
+	launcher.PushBack({ 624, 80, 32, 56 });
+	launcher.PushBack({ 624, 144, 32, 56 });
+	launcher.speed = 3;
 
-	// flag animation
-	flag.PushBack({848, 208, 40, 40});
-	flag.PushBack({848, 256, 40, 40});
-	flag.PushBack({848, 304, 40, 40});
-	flag.speed = 0.08f;
+	// bub animation
+	bub.PushBack({12, 442, 60, 38});
+	bub.PushBack({80, 442, 60, 38});
+	bub.PushBack({ 149, 442, 60, 38 });
+	bub.PushBack({ 217,442, 60, 38 }); 
+	bub.PushBack({285, 442, 60, 38 });
+	bub.PushBack({353, 442, 60, 38 });
+	bub.PushBack({422, 442, 60, 38 });
+	bub.PushBack({490, 442, 60, 38 });
+	
+	bub.speed = 0.3f;
 
-	// Girl Animation
-	girl.PushBack({624, 16, 32, 56});
-	girl.PushBack({624, 80, 32, 56});
-	girl.PushBack({624, 144, 32, 56});
-	girl.speed = 0.05f;
+
 
 	// for moving the foreground
-	foreground_pos = 0;
-	forward = true;
+	//foreground_pos = 0;
+//	forward = true;
 }
 
 ModuleSceneLevel::~ModuleSceneLevel()
@@ -64,10 +72,10 @@ ModuleSceneLevel::~ModuleSceneLevel()
 // Load assets
 bool ModuleSceneLevel::Start()
 {
-	LOG("Loading ken scene");
+	LOG("Loading lvl scene");
 	
 	graphics = App->textures->Load("Level.png");
-	graphics_ball = App->textures->Load("spritesbuenos.png");
+	graphics_sprite = App->textures->Load("Sprites.png");
 	// TODO 1: Enable (and properly disable) the player module
 	App->player->Enable();
 	
@@ -77,7 +85,7 @@ bool ModuleSceneLevel::Start()
 // UnLoad assets
 bool ModuleSceneLevel::CleanUp()
 {
-	LOG("Unloading ken scene");
+	LOG("Unloading lvl scene");
 	App->player->Disable();
 
 	return true;
@@ -99,15 +107,15 @@ update_status ModuleSceneLevel::Update()
 
 	// Draw everything --------------------------------------
 	App->render->Blit(graphics, 0, 0, &background);
-	App->render->Blit(graphics_ball, one_ball->x - 16, one_ball->y - 16, &ballsprite);
-	// sea and sky
-	/*	App->render->Blit(graphics, 560, 8, &(flag.GetCurrentFrame()), 0.75f); // flag animation
+	App->render->Blit(graphics_sprite, one_ball->x - 16, one_ball->y - 16, &ballsprite);
+	// bub
+	App->render->Blit(graphics_sprite, 353, 433, &(bub.GetCurrentFrame()),0.02f ); // Bub animation
+		
+	//	App->render->Blit(graphics, 0, (int)foreground_pos, &foreground, 0.92f);
+		App->render->Blit(graphics, 192, 104 + (int)foreground_pos, &(launcher.GetCurrentFrame()), 0.75f); // launcher animation
 
-		App->render->Blit(graphics, 0, (int)foreground_pos, &foreground, 0.92f);
-		App->render->Blit(graphics, 192, 104 + (int)foreground_pos, &(girl.GetCurrentFrame()), 0.92f); // girl animation
-
-		App->render->Blit(graphics, 0, 170, &ground);
-		*/
+		//App->render->Blit(graphics, 0, 170, &ground);
+		
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT)
 	{
 

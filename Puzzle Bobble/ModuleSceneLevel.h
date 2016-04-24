@@ -20,14 +20,14 @@ public:
 public:
 
 	Ball* one_ball=nullptr;
-	SDL_Texture* graphics_ball = nullptr;
+	SDL_Texture* graphics_sprite = nullptr;
 	SDL_Texture* graphics = nullptr;
 	SDL_Rect ballsprite;
 	SDL_Rect ground;
 	SDL_Rect foreground;
 	SDL_Rect background;
-	Animation flag;
-	Animation girl;
+	Animation bub;
+	Animation launcher;
 
 	float foreground_pos;
 	bool forward;
