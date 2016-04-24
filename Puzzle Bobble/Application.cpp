@@ -5,6 +5,7 @@
 #include "ModuleTextures.h"
 #include "ModuleSceneLevel.h"
 #include "ModuleSceneMenu.h"
+#include "ModuleAudio.h"
 #include "ModulePlayer.h"
 #include "ModuleFadeToBlack.h"
 
@@ -18,6 +19,7 @@ Application::Application()
 	modules[5] = scene_level = new ModuleSceneLevel();
 	modules[6] = player = new ModulePlayer();
 	modules[7] = fade = new ModuleFadeToBlack();
+	modules[8] = audio = new ModuleAudio();
 }	
 
 Application::~Application()

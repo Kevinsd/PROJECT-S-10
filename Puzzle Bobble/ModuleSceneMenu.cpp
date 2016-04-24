@@ -7,6 +7,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleSceneMenu.h"
 #include "ModuleInput.h"
+#include"ModuleAudio.h"
 
 // Reference at https://youtu.be/6OlenbCC4WI?t=382
 
@@ -36,6 +37,8 @@ bool ModuleSceneMenu::Start()
 	LOG("Loading background assets");
 	bool ret = true;
 	graphics = App->textures->Load("Menu.png");
+
+	App->audio->PlayMusic("intro_music.ogg", 1.0f);
 
 	// TODO 1: Enable (and properly disable) the player module
 	App->player->Enable();

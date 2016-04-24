@@ -25,6 +25,7 @@ public:
 	SDL_Rect foreground;
 	SDL_Rect background;
 	Animation water;
+	uint fx = 0;
 };
 
 #endif // __MODULESCENEHONDA_H__

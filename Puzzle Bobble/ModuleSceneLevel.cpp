@@ -7,6 +7,7 @@
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModulePlayer.h"
+#include "ModuleAudio.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -76,6 +77,8 @@ bool ModuleSceneLevel::Start()
 	
 	graphics = App->textures->Load("Level.png");
 	graphics_sprite = App->textures->Load("Sprites.png");
+
+	App->audio->PlayMusic("level_music.ogg", 1.0f);
 	// TODO 1: Enable (and properly disable) the player module
 	App->player->Enable();
 	
