@@ -21,9 +21,14 @@ public:
 
 	Ball* one_ball=nullptr;
 	SDL_Texture* graphics_sprite = nullptr;
+	SDL_Texture* graphics_sprite_launcher = nullptr;
 	SDL_Texture* graphics = nullptr;
-	SDL_Rect ballsprite;
-	SDL_Rect ground;
+	SDL_Rect ballsprite_blue;
+	SDL_Rect ballsprite_red;
+	SDL_Rect ballsprite_yellow;
+	SDL_Rect ballsprite_orange;
+	SDL_Rect ballsprite_grease;
+	SDL_Rect ballsprite_purple;
 	SDL_Rect foreground;
 	SDL_Rect background;
 	Animation bub;

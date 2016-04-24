@@ -13,17 +13,14 @@
 
 ModuleSceneLevel::ModuleSceneLevel()
 {
-	one_ball = new Ball(320,300,16,BLUE);
+	one_ball = new Ball(316,417,16,BLUE);
 
 	//Balls
 
-	ballsprite = { 20, 516, 32, 32 };
+	ballsprite_blue = { 20, 516, 32, 32 };
 
 	// ground
-	ground.x = 8;
-	ground.y = 391;
-	ground.w = 896;
-	ground.h = 72;
+
 
 
 
@@ -57,8 +54,23 @@ ModuleSceneLevel::ModuleSceneLevel()
 	
 	bub.speed = 0.3f;
 
+	//launcher animation
 
+	launcher.PushBack({ 121, 2003, 111, 80 });//2002
+	launcher.PushBack({ 121, 2108, 111, 80 });
+	launcher.PushBack({ 121, 2212, 111, 80 });
+	launcher.PushBack({ 253, 2003, 111, 80 });
+	launcher.PushBack({ 253, 2108, 111, 80 });
+	launcher.PushBack({ 253, 2212, 111, 80 });
+	launcher.PushBack({ 386, 2003, 111, 80 });
+	launcher.PushBack({ 386, 2108, 111, 80 });
+	launcher.PushBack({ 386, 2212, 111, 80 });
+	launcher.PushBack({ 518, 2003, 111, 80 });
+	launcher.PushBack({ 518, 2108, 111, 80 });
+	launcher.PushBack({ 518, 2212, 111, 80 });
 
+	launcher.speed = 0.3f;
+	
 	// for moving the foreground
 	//foreground_pos = 0;
 //	forward = true;
@@ -79,7 +91,7 @@ bool ModuleSceneLevel::Start()
 	graphics_sprite = App->textures->Load("Sprites.png");
 
 	App->audio->PlayMusic("level_music.ogg", 1.0f);
-	// TODO 1: Enable (and properly disable) the player module
+	
 	App->player->Enable();
 	
 	return true;
@@ -110,12 +122,13 @@ update_status ModuleSceneLevel::Update()
 
 	// Draw everything --------------------------------------
 	App->render->Blit(graphics, 0, 0, &background);
-	App->render->Blit(graphics_sprite, one_ball->x - 16, one_ball->y - 16, &ballsprite);
-	// bub
-	App->render->Blit(graphics_sprite, 353, 433, &(bub.GetCurrentFrame()),0.02f ); // Bub animation
+	App->render->Blit(graphics_sprite, 253, 383, &(launcher.GetCurrentFrame()), 0.75f); // launcher animation
+	App->render->Blit(graphics_sprite, one_ball->x - 16, one_ball->y - 16, &ballsprite_blue);
+	// Bub
+	App->render->Blit(graphics_sprite, 350, 433, &(bub.GetCurrentFrame()),0.02f ); // Bub animation
 		
 	//	App->render->Blit(graphics, 0, (int)foreground_pos, &foreground, 0.92f);
-		App->render->Blit(graphics, 192, 104 + (int)foreground_pos, &(launcher.GetCurrentFrame()), 0.75f); // launcher animation
+	//	App->render->Blit(graphics, 253, (int)foreground_pos, &foreground, 0.92f);
 
 		//App->render->Blit(graphics, 0, 170, &ground);
 		
