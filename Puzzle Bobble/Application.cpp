@@ -8,6 +8,7 @@
 #include "ModuleAudio.h"
 #include "ModulePlayer.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleBall.h"
 
 Application::Application()
 {
@@ -20,6 +21,7 @@ Application::Application()
 	modules[6] = player = new ModulePlayer();
 	modules[7] = fade = new ModuleFadeToBlack();
 	modules[8] = audio = new ModuleAudio();
+	modules[9] = ball_controll = new ModuleBall();
 }	
 
 Application::~Application()

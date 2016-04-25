@@ -76,6 +76,7 @@
     <ClInclude Include="MemLeaks.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="ModuleAudio.h" />
+    <ClInclude Include="ModuleBall.h" />
     <ClInclude Include="ModuleFadeToBlack.h" />
     <ClInclude Include="ModuleInput.h" />
     <ClInclude Include="ModulePlayer.h" />
@@ -85,6 +86,7 @@
     <ClInclude Include="ModuleTextures.h" />
     <ClInclude Include="ModuleWindow.h" />
     <ClInclude Include="p2Point.h" />
+    <ClInclude Include="Vector.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
@@ -92,6 +94,7 @@
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ModuleAudio.cpp" />
+    <ClCompile Include="ModuleBall.cpp" />
     <ClCompile Include="ModuleFadeToBlack.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
     <ClCompile Include="ModulePlayer.cpp" />

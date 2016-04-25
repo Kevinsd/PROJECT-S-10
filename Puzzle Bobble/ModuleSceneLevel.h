@@ -4,7 +4,7 @@
 #include "Module.h"
 #include "Animation.h"
 #include "Globals.h"
-#include "Ball.h"
+
 struct SDL_Texture;
 
 class ModuleSceneLevel : public Module
@@ -19,7 +19,7 @@ public:
 
 public:
 
-	Ball* one_ball=nullptr;
+	int shoot_angle = 90;
 	SDL_Texture* graphics_sprite = nullptr;
 	SDL_Texture* graphics_sprite_launcher = nullptr;
 	SDL_Texture* graphics = nullptr;
