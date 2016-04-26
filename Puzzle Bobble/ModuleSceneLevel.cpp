@@ -8,21 +8,17 @@
 #include "ModuleFadeToBlack.h"
 #include "ModulePlayer.h"
 #include "ModuleAudio.h"
+#include "ModuleBall.h"
+#include "Vector.h"
+
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
 ModuleSceneLevel::ModuleSceneLevel()
 {
-	one_ball = new Ball(316,417,16,BLUE);
+	//one_ball = new Ball(316,417,16,BLUE);
 
 	//Balls
-
-	ballsprite_blue = { 20, 516, 32, 32 };
-
-	// ground
-
-
-
 
 	// foreground
 	foreground.x = 8;
@@ -56,7 +52,7 @@ ModuleSceneLevel::ModuleSceneLevel()
 
 	//launcher animation
 
-	launcher.PushBack({ 121, 2003, 111, 80 });//2002
+	launcher.PushBack({ 50, 1020, 56, 40 });
 	launcher.PushBack({ 121, 2108, 111, 80 });
 	launcher.PushBack({ 121, 2212, 111, 80 });
 	launcher.PushBack({ 253, 2003, 111, 80 });
@@ -70,6 +66,20 @@ ModuleSceneLevel::ModuleSceneLevel()
 	launcher.PushBack({ 518, 2212, 111, 80 });
 
 	launcher.speed = 0.3f;
+	/*launcher.PushBack({ 50, 1020, 56, 40 });//2003
+	launcher.PushBack({ 121, 2108, 111, 80 });
+	launcher.PushBack({ 121, 2212, 111, 80 });
+	launcher.PushBack({ 253, 2003, 111, 80 });
+	launcher.PushBack({ 253, 2108, 111, 80 });
+	launcher.PushBack({ 253, 2212, 111, 80 });
+	launcher.PushBack({ 386, 2003, 111, 80 });
+	launcher.PushBack({ 386, 2108, 111, 80 });
+	launcher.PushBack({ 386, 2212, 111, 80 });
+	launcher.PushBack({ 518, 2003, 111, 80 });
+	launcher.PushBack({ 518, 2108, 111, 80 });
+	launcher.PushBack({ 518, 2212, 111, 80 });
+
+	launcher.speed = 0.3f;*/
 	
 	// for moving the foreground
 	//foreground_pos = 0;
@@ -78,7 +88,7 @@ ModuleSceneLevel::ModuleSceneLevel()
 
 ModuleSceneLevel::~ModuleSceneLevel()
 {
-	delete one_ball;
+	//delete one_ball;
 }
 
 
@@ -88,7 +98,7 @@ bool ModuleSceneLevel::Start()
 	LOG("Loading lvl scene");
 	
 	graphics = App->textures->Load("Level.png");
-	graphics_sprite = App->textures->Load("Sprites.png");
+	graphics_sprite = App->textures->Load("Spritespuzzle.png");
 
 	App->audio->PlayMusic("level_music.ogg", 1.0f);
 	
@@ -122,8 +132,9 @@ update_status ModuleSceneLevel::Update()
 
 	// Draw everything --------------------------------------
 	App->render->Blit(graphics, 0, 0, &background);
-	App->render->Blit(graphics_sprite, 253, 383, &(launcher.GetCurrentFrame()), 0.75f); // launcher animation
-	App->render->Blit(graphics_sprite, one_ball->x - 16, one_ball->y - 16, &ballsprite_blue);
+	App->render->Blit(graphics_sprite, 126, 160, &(launcher.GetCurrentFrame()), 0.75f); // launcher animation
+
+	
 	// Bub
 	App->render->Blit(graphics_sprite, 350, 433, &(bub.GetCurrentFrame()),0.02f ); // Bub animation
 		
@@ -132,14 +143,24 @@ update_status ModuleSceneLevel::Update()
 
 		//App->render->Blit(graphics, 0, 170, &ground);
 		
+	if (App->input->keyboard[SDL_SCANCODE_1] == KEY_DOWN)
+	{
+	//	App->ball_controll->GetPos( pos_x,  pos_y);
+		App->render->Blit(graphics_sprite, App->ball_controll->moving_ball->x - 16, App->ball_controll->moving_ball->y - 16, &ballsprite_blue);
+	//	shoot_angle;
+
+
+			//one_ball->x += 1;
+
+
+	}
+
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT)
 	{
-
-		one_ball->moving_left = true;
-
-		if (one_ball->moving_left)
-
-			one_ball->Move();
+		if (App->ball_controll->moving_ball != NULL)
+		{
+			App->ball_controll->moving_ball->Shoot(shoot_angle);
+		}
 
 
 		//one_ball->x += 1;
@@ -150,13 +171,10 @@ update_status ModuleSceneLevel::Update()
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_REPEAT)
 	{
 
-		one_ball->moving_right = true;
-	
-		if (one_ball->moving_right)
-			
-			one_ball->Move();
-		
-
+		if (App->ball_controll->moving_ball != NULL)
+		{
+			App->ball_controll->moving_ball->Shoot(shoot_angle);
+		}
 		//one_ball->x += 1;
 
 	
@@ -164,12 +182,10 @@ update_status ModuleSceneLevel::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN)
 	{
-		one_ball->moving = true;
+		if (App->ball_controll->moving_ball != NULL)
+		{
+			App->ball_controll->ShootBall(shoot_angle);
+		}
 	}
-	if (one_ball->moving)
-		
-		one_ball->Move();
-
-
 	return UPDATE_CONTINUE;
 }

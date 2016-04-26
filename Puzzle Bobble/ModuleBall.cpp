@@ -45,7 +45,7 @@ update_status ModuleBall::Update()
 				
 				p2Point <int> get_pos = GetPos(moving_ball->x,moving_ball->y);
 				unsigned int index = get_pos.y * 8 + get_pos.x;
-				moving_ball->x= (int)moving_ball->x / 32 * 32 + 16;//mirar aqui
+				moving_ball->x= (int)moving_ball->x / 32 * 32 + 16;//look there
 				moving_ball->y=(int)moving_ball->y / 32 * 32 ;
 				array.push_back(moving_ball); 
 				moving_ball = NULL;
@@ -76,7 +76,7 @@ void ModuleBall::CreateBall()
 {
 	Color type = static_cast <Color> (rand()% 3);
 
-	App->ball_controll->moving_ball = new Ball(316, 417, 16, type);
+	App->ball_controll->moving_ball = new Ball(150, 205, 16, type); //look
 }
 p2Point <int>  ModuleBall::GetPos(int x, int y)
 {

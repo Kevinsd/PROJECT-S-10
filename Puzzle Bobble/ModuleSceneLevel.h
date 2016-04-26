@@ -34,6 +34,7 @@ public:
 	Animation bub;
 	Animation launcher;
 
+
 	float foreground_pos;
 	bool forward;
 };
