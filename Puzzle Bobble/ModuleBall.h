@@ -27,8 +27,11 @@ public:
 	Ball* moving_ball = nullptr;
 	Vector<Ball*> array;
 	SDL_Rect ballsprite_blue;
-
-
+	SDL_Rect ballsprite_green;
+	SDL_Rect ballsprite_yellow;
+	SDL_Rect ballsprite_red;
+	SDL_Rect ballsprite_gray;
+	SDL_Rect ballsprite_purple;
 private:
 
 

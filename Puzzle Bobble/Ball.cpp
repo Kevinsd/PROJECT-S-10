@@ -30,24 +30,24 @@ bool Ball::Move()
 		x += vel_x;
 		y -= vel_y;
 
-		if (x >= 432)
+		if (x+rad >= 224)
 		{
-			x = 432;
+			x = 224 - rad;
 			angle = 3.14 - angle;
 		}
 
-		if (x <= 208)
+		if (x-rad <= 96)
 		{
-			x = 208;
+			x = 96 + rad;
 			angle = 3.14 - angle;
 		}
 
 
-		if (y <= 64)
+		if (y-rad <= 24 )
 
 		{
 			moving = false;
-			y = 64;
+			y = 24 + rad;
 			return false;
 		}
 

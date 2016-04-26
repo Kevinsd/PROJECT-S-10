@@ -116,16 +116,7 @@ bool ModuleSceneLevel::CleanUp()
 // Update: draw background
 update_status ModuleSceneLevel::Update()
 {
-	// Calculate boat Y position -----------------------------
-	/*if (foreground_pos < -6.0f)
-		forward = false;
-	else if (foreground_pos > 0.0f)
-		forward = true;
-
-	if (forward)
-		foreground_pos -= 0.02f;
-	else
-		foreground_pos += 0.02f;*/
+	
 
 	// Draw everything --------------------------------------
 	App->render->Blit(graphics, 0, 0, &background);
@@ -145,12 +136,10 @@ update_status ModuleSceneLevel::Update()
 	{
 	//	App->ball_controll->GetPos( pos_x,  pos_y);
 
-		if (App->ball_controll->moving_ball != NULL)
-			//App->render->Blit(graphics_sprite, App->ball_controll->moving_ball->x - 8, App->ball_controll->moving_ball->y - 8, &ballsprite_blue);
-			//	shoot_angle;
+		if (App->ball_controll->moving_ball == NULL)
 
 		{
-
+			App->ball_controll->CreateBall();
 		}
 			
 
@@ -158,28 +147,16 @@ update_status ModuleSceneLevel::Update()
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT)
-	{
-		if (App->ball_controll->moving_ball != NULL)
-		{
-			App->ball_controll->moving_ball->Shoot(shoot_angle);
-		}
+	{	
+		if (shoot_angle <=170)
 
-
-	
-
-
+		shoot_angle += 1;
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_REPEAT)
-	{
-
-		if (App->ball_controll->moving_ball != NULL)
-		{
-			App->ball_controll->moving_ball->Shoot(shoot_angle);
-		}
-		
-
-	
+	{	
+		if (shoot_angle >= 10)
+		shoot_angle -= 1;
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN)

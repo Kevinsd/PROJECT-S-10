@@ -3,7 +3,7 @@
 
 
 
-enum Color { BLUE, RED, GREEN, YELLOW };
+enum Color { BLUE, RED, GREEN, YELLOW,PURPLE,GRAY };
 
 class Ball
 
@@ -14,9 +14,9 @@ public:
 
 	float x = 0;
 	float y = 0;
-	int rad = 0;
+	int rad = 8;
 	float angle = 0;
-	float velocity = 9;
+	float velocity = 1;
 	bool moving = false;
 	Color color;
 

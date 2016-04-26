@@ -18,7 +18,13 @@ ModuleBall::~ModuleBall()
 // Called before render is available
 bool ModuleBall::Init()
 {
-	ballsprite_blue = { 20, 516, 32, 32 };
+	ballsprite_blue = { 12, 260, 16, 16 };
+	ballsprite_gray = { 12, 270, 16, 16 };
+	ballsprite_red = { 12, 200, 16, 16 };
+	ballsprite_yellow = { 12, 210, 16, 16 };
+	ballsprite_purple = { 12, 211, 16, 16 };
+	ballsprite_green = { 12, 212, 16, 16 };
+
 
 	return true;
 }
@@ -53,8 +59,21 @@ update_status ModuleBall::Update()
 			}
 
 		}
-		if (moving_ball!=NULL)
-		App->render->Blit(App->scene_level->graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_blue);
+		if (moving_ball != NULL)
+		{
+			if (moving_ball->color == BLUE)
+				App->render->Blit(App->scene_level->graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_blue);		
+			if (moving_ball->color == GRAY)
+				App->render->Blit(App->scene_level->graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_gray);
+			if (moving_ball->color == RED)
+				App->render->Blit(App->scene_level->graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_red);
+			if (moving_ball->color == GREEN)
+				App->render->Blit(App->scene_level->graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_green);
+			if (moving_ball->color == YELLOW)
+				App->render->Blit(App->scene_level->graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_yellow);
+			if (moving_ball->color == PURPLE)
+				App->render->Blit(App->scene_level->graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_purple);
+		}
 	}
 	return UPDATE_CONTINUE;
 }
@@ -76,7 +95,8 @@ void ModuleBall::CreateBall()
 {
 	Color type = static_cast <Color> (rand()% 3);
 
-	App->ball_controll->moving_ball = new Ball(150, 205, 16, type); //look
+	moving_ball = new Ball(162, 208, 8, type); //look
+	
 }
 p2Point <int>  ModuleBall::GetPos(int x, int y)
 {
