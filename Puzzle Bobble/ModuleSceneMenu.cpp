@@ -23,7 +23,7 @@ ModuleSceneMenu::ModuleSceneMenu()
 
 
 	// Background / sky
-	background = {0, 0, 640, 480};
+	background = {0, 0, 320, 240};
 
 
 }
@@ -36,7 +36,7 @@ bool ModuleSceneMenu::Start()
 {
 	LOG("Loading background assets");
 	bool ret = true;
-	graphics = App->textures->Load("Menu.png");
+	graphics = App->textures->Load("Menu2.png");
 
 	App->audio->PlayMusic("intro_music.ogg", 1.0f);
 

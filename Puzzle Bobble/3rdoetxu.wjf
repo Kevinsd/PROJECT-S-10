@@ -33,36 +33,39 @@ ModuleSceneLevel::ModuleSceneLevel()
 	background.h = 240;
 	
 	// Launcher Animation
-
+	launcher.PushBack({ 624, 16, 32, 56 });
+	launcher.PushBack({ 624, 80, 32, 56 });
+	launcher.PushBack({ 624, 144, 32, 56 });
+	launcher.speed = 3;
 
 	// bub animation
-	bub.PushBack({8, 220, 27, 19});
-	bub.PushBack({42, 220, 28, 19});
-	bub.PushBack({ 76, 220, 31, 19 });
-	bub.PushBack({ 110,220, 31, 19 }); 
-	bub.PushBack({144, 220, 29, 19 });
-	bub.PushBack({178, 220, 28, 19 });
-	bub.PushBack({212, 220, 26, 19 });
-	bub.PushBack({246, 220, 26, 19 });
+	bub.PushBack({12, 442, 60, 38});
+	bub.PushBack({80, 442, 60, 38});
+	bub.PushBack({ 149, 442, 60, 38 });
+	bub.PushBack({ 217,442, 60, 38 }); 
+	bub.PushBack({285, 442, 60, 38 });
+	bub.PushBack({353, 442, 60, 38 });
+	bub.PushBack({422, 442, 60, 38 });
+	bub.PushBack({490, 442, 60, 38 });
 	
 	bub.speed = 0.3f;
 
 	//launcher animation
 
 	launcher.PushBack({ 50, 1020, 56, 40 });
-	launcher.PushBack({ 50, 1077, 56, 40 });
+	launcher.PushBack({ 50, 1078, 56, 40 });
 	launcher.PushBack({ 50, 1131, 56, 40 });
-	launcher.PushBack({ 116, 1020, 56, 40 });
-	launcher.PushBack({ 116, 1077, 56, 40 });
+	launcher.PushBack({ 116, 1020, 56, 45 });
+	launcher.PushBack({ 116, 1078, 56, 40 });
 	launcher.PushBack({ 116, 1131, 56, 40 });
 	launcher.PushBack({ 182, 1020, 56, 40 });
-	launcher.PushBack({ 182, 1077, 56, 40 });
+	launcher.PushBack({ 182, 1078, 56, 40 });
 	launcher.PushBack({ 182, 1131, 56, 40 });
 	launcher.PushBack({ 248, 1020, 56, 40 });
-	launcher.PushBack({ 248, 1077, 56, 40 });
+	launcher.PushBack({ 248, 1078, 56, 40 });
 	launcher.PushBack({ 248, 1131, 56, 40 });
 
-	launcher.speed = 0.3f;
+	launcher.speed = 0.03f;
 	/*launcher.PushBack({ 50, 1020, 56, 40 });//2003
 	launcher.PushBack({ 121, 2108, 111, 80 });
 	launcher.PushBack({ 121, 2212, 111, 80 });
@@ -129,11 +132,11 @@ update_status ModuleSceneLevel::Update()
 
 	// Draw everything --------------------------------------
 	App->render->Blit(graphics, 0, 0, &background);
-	App->render->Blit(graphics_sprite, 130, 192, &(launcher.GetCurrentFrame()), 0.75f); // launcher animation
+	App->render->Blit(graphics_sprite, 136, 190, &(launcher.GetCurrentFrame()), 0.75f); // launcher animation
 
 	
 	// Bub
-	App->render->Blit(graphics_sprite, 172 ,213, &(bub.GetCurrentFrame()),0.02f ); // Bub animation
+	App->render->Blit(graphics_sprite, 150, 190, &(bub.GetCurrentFrame()),0.02f ); // Bub animation
 		
 	//	App->render->Blit(graphics, 0, (int)foreground_pos, &foreground, 0.92f);
 	//	App->render->Blit(graphics, 253, (int)foreground_pos, &foreground, 0.92f);
@@ -143,13 +146,11 @@ update_status ModuleSceneLevel::Update()
 	if (App->input->keyboard[SDL_SCANCODE_1] == KEY_DOWN)
 	{
 	//	App->ball_controll->GetPos( pos_x,  pos_y);
-
-		if (App->ball_controll->moving_ball != NULL)
 		App->render->Blit(graphics_sprite, App->ball_controll->moving_ball->x - 16, App->ball_controll->moving_ball->y - 16, &ballsprite_blue);
 	//	shoot_angle;
 
 
-			
+			//one_ball->x += 1;
 
 
 	}
@@ -162,7 +163,7 @@ update_status ModuleSceneLevel::Update()
 		}
 
 
-	
+		//one_ball->x += 1;
 
 
 	}
@@ -174,7 +175,7 @@ update_status ModuleSceneLevel::Update()
 		{
 			App->ball_controll->moving_ball->Shoot(shoot_angle);
 		}
-		
+		//one_ball->x += 1;
 
 	
 	}
