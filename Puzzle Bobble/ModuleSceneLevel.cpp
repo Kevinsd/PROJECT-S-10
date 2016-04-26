@@ -140,6 +140,7 @@ update_status ModuleSceneLevel::Update()
 
 		//App->render->Blit(graphics, 0, 170, &ground);
 		
+
 	if (App->input->keyboard[SDL_SCANCODE_1] == KEY_DOWN)
 	{
 	//	App->ball_controll->GetPos( pos_x,  pos_y);
