@@ -31,6 +31,8 @@ public:
 	SDL_Rect ballsprite_purple;
 	SDL_Rect foreground;
 	SDL_Rect background;
+	Animation pipe;
+	Animation pipe2;
 	Animation bub;
 	Animation launcher;
 

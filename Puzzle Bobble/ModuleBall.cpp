@@ -33,7 +33,7 @@ update_status ModuleBall::Update()
 {
 	for (unsigned int i = 0; i < array.size(); i++)
 	{
-		App->render->Blit(App->scene_level->graphics_sprite, array[i]->x - 16, array[i]->y - 16, &ballsprite_blue);
+		App->render->Blit(App->scene_level->graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_blue);
 	}
 	if (moving_ball != NULL)
 	{
@@ -45,8 +45,8 @@ update_status ModuleBall::Update()
 				
 				p2Point <int> get_pos = GetPos(moving_ball->x,moving_ball->y);
 				unsigned int index = get_pos.y * 8 + get_pos.x;
-				moving_ball->x= (int)moving_ball->x / 32 * 32 + 16;//look there
-				moving_ball->y=(int)moving_ball->y / 32 * 32 ;
+				moving_ball->x= (int)moving_ball->x / 16 * 16 + 8;//look there
+				moving_ball->y=(int)moving_ball->y / 16 * 16 ;
 				array.push_back(moving_ball); 
 				moving_ball = NULL;
 
@@ -54,7 +54,7 @@ update_status ModuleBall::Update()
 
 		}
 		if (moving_ball!=NULL)
-		App->render->Blit(App->scene_level->graphics_sprite, moving_ball->x - 16, moving_ball->y - 16, &ballsprite_blue);
+		App->render->Blit(App->scene_level->graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_blue);
 	}
 	return UPDATE_CONTINUE;
 }

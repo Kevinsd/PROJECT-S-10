@@ -20,11 +20,11 @@ ModuleSceneLevel::ModuleSceneLevel()
 
 	//Balls
 
-	// foreground
-	foreground.x = 8;
-	foreground.y = 24;
-	foreground.w = 521;
-	foreground.h = 181;
+	// Pipe
+
+	pipe.PushBack({338,1087,13,11});
+
+	pipe2.PushBack({ 338, 1087, 13, 11 });
 	
 	// Background / sky
 	background.x = 0;
@@ -117,7 +117,7 @@ bool ModuleSceneLevel::CleanUp()
 update_status ModuleSceneLevel::Update()
 {
 	// Calculate boat Y position -----------------------------
-	if (foreground_pos < -6.0f)
+	/*if (foreground_pos < -6.0f)
 		forward = false;
 	else if (foreground_pos > 0.0f)
 		forward = true;
@@ -125,12 +125,12 @@ update_status ModuleSceneLevel::Update()
 	if (forward)
 		foreground_pos -= 0.02f;
 	else
-		foreground_pos += 0.02f;
+		foreground_pos += 0.02f;*/
 
 	// Draw everything --------------------------------------
 	App->render->Blit(graphics, 0, 0, &background);
 	App->render->Blit(graphics_sprite, 130, 192, &(launcher.GetCurrentFrame()), 0.75f); // launcher animation
-
+	
 	
 	// Bub
 	App->render->Blit(graphics_sprite, 172 ,213, &(bub.GetCurrentFrame()),0.02f ); // Bub animation
@@ -145,10 +145,12 @@ update_status ModuleSceneLevel::Update()
 	//	App->ball_controll->GetPos( pos_x,  pos_y);
 
 		if (App->ball_controll->moving_ball != NULL)
-		App->render->Blit(graphics_sprite, App->ball_controll->moving_ball->x - 16, App->ball_controll->moving_ball->y - 16, &ballsprite_blue);
-	//	shoot_angle;
+			//App->render->Blit(graphics_sprite, App->ball_controll->moving_ball->x - 8, App->ball_controll->moving_ball->y - 8, &ballsprite_blue);
+			//	shoot_angle;
 
+		{
 
+		}
 			
 
 
@@ -184,7 +186,9 @@ update_status ModuleSceneLevel::Update()
 		if (App->ball_controll->moving_ball != NULL)
 		{
 			App->ball_controll->ShootBall(shoot_angle);
+			App->render->Blit(graphics_sprite, 154, 215, &(pipe2.GetCurrentFrame()), 0.75f);
 		}
 	}
+	App->render->Blit(graphics_sprite, 154, 215, &(pipe.GetCurrentFrame()), 0.75f);
 	return UPDATE_CONTINUE;
 }
