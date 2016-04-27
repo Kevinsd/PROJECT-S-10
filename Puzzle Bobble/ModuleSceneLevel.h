@@ -4,6 +4,7 @@
 #include "Module.h"
 #include "Animation.h"
 #include "Globals.h"
+#include "ModuleAudio.h"
 
 struct SDL_Texture;
 
@@ -40,6 +41,8 @@ public:
 	Animation bub;
 	Animation bub_static;
 	Animation launcher;
+	//  Throw sound
+	Mix_Chunk* throw_effect = nullptr;
 
 
 	float foreground_pos;

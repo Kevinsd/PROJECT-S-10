@@ -122,6 +122,8 @@ bool ModuleSceneLevel::Start()
 	graphics_sprite = App->textures->Load("spritespuzzle.png");
 
 	App->audio->PlayMusic("level_music.ogg", 1.0f);
+
+	throw_effect = App->audio->Load_effects("throw_effect.wav");
 	
 	App->ball_controll->AddBall(0, 0, RED);
 	App->ball_controll->AddBall(1, 0, RED);
@@ -230,6 +232,7 @@ update_status ModuleSceneLevel::Update()
 			pipe.speed = 0.02f;
 			App->render->Blit(graphics_sprite, 154, 215, &(pipe.GetCurrentFrame()), 0.75f);
 		}
+		Mix_PlayChannel(-1, throw_effect, 0);
 	}
 	
 	App->render->Blit(graphics_sprite, 151, 180, &arrowRect, 1.0f, 90-shoot_angle);
