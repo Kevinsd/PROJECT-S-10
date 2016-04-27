@@ -16,7 +16,7 @@ public:
 	float y = 0;
 	int rad = 8;
 	float angle = 0;
-	float velocity = 2;
+	float velocity = 3;
 	bool moving = false;
 	Color color;
 	Ball* collidedBall;

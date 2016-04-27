@@ -90,6 +90,10 @@ update_status ModuleBall::Update()
 						moving_ball = NULL;
 				}
 				CreateBall();
+				/*if (array.size() == 0)
+				{
+					App->fade->FadeToBlack(App->scene_level,(Module*)App->scene_menu);
+				}*/
 			}
 		}
 		if (moving_ball != NULL)
@@ -249,10 +253,10 @@ p2Point <int>  ModuleBall::GetTile(int x, int y)
 	{
 
 		pos_x = x / 16 ;
-		if (pos_x != 0)
+		/*if (pos_x != 0)
 		{
 			pos_x += 1;
-		}
+		}*/
 	}
 	LOG("x:%i,y;%i", pos_x, pos_y);
 	p2Point <int> ret = { pos_x, pos_y };
