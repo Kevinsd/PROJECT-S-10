@@ -26,6 +26,9 @@ public:
 	SDL_Rect background;
 	Animation water;
 	uint fx = 0;
+
+	//go level effect
+	Mix_Chunk* go_level = nullptr;
 };
 
 #endif // __MODULESCENEHONDA_H__

@@ -7,7 +7,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleSceneMenu.h"
 #include "ModuleInput.h"
-#include"ModuleAudio.h"
+#include "ModuleAudio.h"
 
 // Reference at https://youtu.be/6OlenbCC4WI?t=382
 
@@ -40,7 +40,8 @@ bool ModuleSceneMenu::Start()
 
 	App->audio->PlayMusic("intro_music.ogg", 1.0f);
 
-	// TODO 1: Enable (and properly disable) the player module
+	go_level = App->audio->Load_effects("Go_level.wav");
+
 	App->player->Enable();
 
 	return ret;
@@ -73,6 +74,7 @@ update_status ModuleSceneMenu::Update()
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
 	{
 		App->fade->FadeToBlack(App->scene_menu,App->scene_level, 1.0f);
+		Mix_PlayChannel(-1, go_level, 0);
 	}
 	return UPDATE_CONTINUE;
 	
