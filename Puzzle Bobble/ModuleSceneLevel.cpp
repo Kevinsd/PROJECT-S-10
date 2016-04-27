@@ -165,7 +165,7 @@ update_status ModuleSceneLevel::Update()
 
 	//wheel
 
-	App->render->Blit(graphics, 179, 213, &wheel);
+	
 
 
 	// Bub
@@ -231,9 +231,9 @@ update_status ModuleSceneLevel::Update()
 			App->render->Blit(graphics_sprite, 154, 215, &(pipe.GetCurrentFrame()), 0.75f);
 		}
 	}
-
+	
 	App->render->Blit(graphics_sprite, 151, 180, &arrowRect, 1.0f, 90-shoot_angle);
 	App->render->Blit(graphics_sprite, 86, 209, &bag, 0.75f); // Bag 
-
+	App->render->Blit(graphics, 179, 213, &wheel);
 	return UPDATE_CONTINUE;
 }
