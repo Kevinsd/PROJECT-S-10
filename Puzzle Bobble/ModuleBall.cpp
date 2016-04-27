@@ -19,11 +19,11 @@ ModuleBall::~ModuleBall()
 bool ModuleBall::Init()
 {
 	ballsprite_blue = { 12, 260, 16, 16 };
-	ballsprite_gray = { 12, 270, 16, 16 };
-	ballsprite_red = { 12, 200, 16, 16 };
-	ballsprite_yellow = { 12, 210, 16, 16 };
+	ballsprite_gray = { 12, 286, 16, 16 };
+	ballsprite_red = { 12, 312, 16, 16 };
+	ballsprite_yellow = { 12, 338, 16, 16 };
 	ballsprite_purple = { 12, 211, 16, 16 };
-	ballsprite_green = { 12, 212, 16, 16 };
+	ballsprite_green = { 318, 260, 16, 16 };
 
 
 	return true;
@@ -39,7 +39,20 @@ update_status ModuleBall::Update()
 {
 	for (unsigned int i = 0; i < array.size(); i++)
 	{
-		App->render->Blit(App->scene_level->graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_blue);
+		
+			App->render->Blit(App->scene_level->graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_blue);
+			if (moving_ball != NULL)
+			{
+				App->render->Blit(App->scene_level->graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_gray);
+
+				App->render->Blit(App->scene_level->graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_red);
+
+				App->render->Blit(App->scene_level->graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_green);
+
+				App->render->Blit(App->scene_level->graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_yellow);
+
+				App->render->Blit(App->scene_level->graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_purple);
+			}
 	}
 	if (moving_ball != NULL)
 	{
@@ -93,7 +106,7 @@ void ModuleBall::ShootBall(float shoot)
 
 void ModuleBall::CreateBall()
 {
-	Color type = static_cast <Color> (rand()% 3);
+	Color type = static_cast <Color> (rand()% 4);
 
 	moving_ball = new Ball(162, 208, 8, type); //look
 	
