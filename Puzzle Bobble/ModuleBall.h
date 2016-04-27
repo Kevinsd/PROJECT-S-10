@@ -29,6 +29,7 @@ public:
 	void ShootBall(float);
 	void CreateBall();
 	void AddBall(int tile_x, int tile_y, Color color);
+	void DeleteFlying();
 	p2Point<int> CheckClosestEmpty(Ball* collided, Ball* toMove);
 
 	p2Point <int> GetTile(int,int);

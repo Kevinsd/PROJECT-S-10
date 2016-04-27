@@ -6,6 +6,7 @@
 #include "Globals.h"
 #include <stdlib.h>
 #include "ModuleFadeToBlack.h"
+#include "ModuleSceneCongrat.h"
 
 ModuleBall::ModuleBall()
 {
@@ -86,14 +87,15 @@ update_status ModuleBall::Update()
 					array.push_back(moving_ball);
 
 					Check_Pop(moving_ball);
+					DeleteFlying();
 					if (moving_ball)
 						moving_ball = NULL;
 				}
 				CreateBall();
-				/*if (array.size() == 0)
+				if (array.size() == 0)
 				{
-					App->fade->FadeToBlack(App->scene_level,(Module*)App->scene_menu);
-				}*/
+					App->fade->FadeToBlack((Module*)App->scene_level, App->scene_congrat);
+				}
 			}
 		}
 		if (moving_ball != NULL)
@@ -137,10 +139,32 @@ void ModuleBall::ShootBall(float shoot)
 
 void ModuleBall::CreateBall()
 {
-	Color type = static_cast <Color> (rand()% 4);
-
+	Vector<Color> vector;
+	for (uint i = 0; i < array.size(); i++)
+	{
+		bool found = false;
+		for (uint c = 0; c < vector.size(); c++)
+		{
+			if (vector[c] == array[i]->color)
+			{
+				found = true;
+				break;
+			}
+		}
+		if (!found)
+		{
+			vector.push_back(array[i]->color);
+		}
+	}
+	Color type;
+	if (vector.size())
+	{
+		uint index = rand() % vector.size();
+		type = vector[index];
+	}
+	else
+		type = static_cast<Color>(rand() % 3);
 	moving_ball = new Ball(162, 208, 8, type); //look
-	
 }
 
 void ModuleBall::AddBall(int tile_x, int tile_y, Color color)
@@ -206,34 +230,90 @@ p2Point<int> ModuleBall::CheckClosestEmpty(Ball* collided, Ball* toMove)
 			}
 		}
 
-		if (!CheckTile(colTile.x + 1, colTile.y + 1))
+		if (colTile.y % 2 != 0)
 		{
-			iPoint pos = GetPos(colTile.x + 1, colTile.y + 1);
-			float dstX = pos.x - toMove->x;
-			float dstY = pos.y - toMove->y; 
-			if (sqrt(dstX*dstX + dstY * dstY) < lowerDst)
+			if (!CheckTile(colTile.x + 1, colTile.y + 1))
 			{
-				lowerDst = sqrt(dstX*dstX + dstY * dstY);
-				ret = { colTile.x + 1, colTile.y + 1 };
+				iPoint pos = GetPos(colTile.x + 1, colTile.y + 1);
+				float dstX = pos.x - toMove->x;
+				float dstY = pos.y - toMove->y; 
+				if (sqrt(dstX*dstX + dstY * dstY) < lowerDst)
+				{
+					lowerDst = sqrt(dstX*dstX + dstY * dstY);
+					ret = { colTile.x + 1, colTile.y + 1 };
+				}
+			}
+			if (!CheckTile(colTile.x + 1, colTile.y - 1))
+			{
+				iPoint pos = GetPos(colTile.x + 1, colTile.y - 1);
+				float dstX = pos.x - toMove->x;
+				float dstY = pos.y - toMove->y;
+				if (sqrt(dstX*dstX + dstY * dstY) < lowerDst)
+				{
+					lowerDst = sqrt(dstX*dstX + dstY * dstY);
+					ret = { colTile.x + 1, colTile.y - 1 };
+				}
 			}
 		}
-		if (!CheckTile(colTile.x + 1, colTile.y - 1))
+		else
 		{
-			iPoint pos = GetPos(colTile.x + 1, colTile.y - 1);
-			float dstX = pos.x - toMove->x;
-			float dstY = pos.y - toMove->y;
-			if (sqrt(dstX*dstX + dstY * dstY) < lowerDst)
+			if (!CheckTile(colTile.x - 1, colTile.y + 1))
 			{
-				lowerDst = sqrt(dstX*dstX + dstY * dstY);
-				ret = { colTile.x + 1, colTile.y - 1 };
+				iPoint pos = GetPos(colTile.x - 1, colTile.y + 1);
+				float dstX = pos.x - toMove->x;
+				float dstY = pos.y - toMove->y;
+				if (sqrt(dstX*dstX + dstY * dstY) < lowerDst)
+				{
+					lowerDst = sqrt(dstX*dstX + dstY * dstY);
+					ret = { colTile.x - 1, colTile.y + 1 };
+				}
+			}
+			if (!CheckTile(colTile.x - 1, colTile.y - 1))
+			{
+				iPoint pos = GetPos(colTile.x - 1, colTile.y - 1);
+				float dstX = pos.x - toMove->x;
+				float dstY = pos.y - toMove->y;
+				if (sqrt(dstX*dstX + dstY * dstY) < lowerDst)
+				{
+					lowerDst = sqrt(dstX*dstX + dstY * dstY);
+					ret = { colTile.x - 1, colTile.y - 1 };
+				}
 			}
 		}
+
 	}
 	else
 	{
 		ret = GetTile(toMove->x, toMove->y);
 	}
 	return ret;
+}
+
+void ModuleBall::DeleteFlying()
+{
+	for (uint i = 0; i < array.size(); i++)
+	{
+		if (array[i]->y != 24 + 8)
+		{
+			iPoint tile = GetTile(array[i]->x, array[i]->y);
+			if (tile.y % 2 != 0)
+			{
+				if (!CheckTile(tile.x, tile.y - 1) && !CheckTile(tile.x + 1, tile.y - 1))
+				{
+					array.Pick(i);
+					i--;
+				}
+			}
+			else
+			{
+				if (!CheckTile(tile.x, tile.y - 1) && !CheckTile(tile.x - 1, tile.y - 1))
+				{
+					array.Pick(i);
+					i--;
+				}
+			}
+		}
+	}
 }
 
 p2Point <int>  ModuleBall::GetTile(int x, int y)
@@ -246,17 +326,12 @@ p2Point <int>  ModuleBall::GetTile(int x, int y)
 	
 	if (pos_y % 2 != 0)
 	{
-		x += 8;
+		x -= 8;
 		pos_x = x / 16;		
 	}
 	else
 	{
-
 		pos_x = x / 16 ;
-		/*if (pos_x != 0)
-		{
-			pos_x += 1;
-		}*/
 	}
 	LOG("x:%i,y;%i", pos_x, pos_y);
 	p2Point <int> ret = { pos_x, pos_y };
@@ -318,8 +393,8 @@ Ball* ModuleBall::Collision()
 {
 	for (unsigned int i = 0; i < array.size(); i++)
 	{
-		int dist_x = moving_ball->x - array[i]->x;
-		int dist_y = moving_ball->y - array[i]->y;
+		float dist_x = moving_ball->x - array[i]->x;
+		float dist_y = moving_ball->y - array[i]->y;
 		dist_x = dist_x*dist_x;
 		dist_y = dist_y*dist_y;
 		int dist_final = sqrt((float)dist_x + (float)dist_y);
@@ -403,7 +478,15 @@ void ModuleBall::CheckSoroundings(Ball* ball, Vector<Ball*>& toCheck, Vector<Bal
 		}
 	}
 	checking = NULL;
-	checking = GetBallFromTile(tile.x + 1, tile.y + 1);
+	if (tile.y % 2 != 0)
+	{
+		checking = GetBallFromTile(tile.x + 1, tile.y + 1);
+	}
+	else
+	{
+		checking = GetBallFromTile(tile.x - 1, tile.y + 1);
+	}
+
 	if (checking && checking->color == ball->color)
 	{
 		if (!IsChecked(checking, toCheck, checked))
@@ -412,7 +495,14 @@ void ModuleBall::CheckSoroundings(Ball* ball, Vector<Ball*>& toCheck, Vector<Bal
 		}
 	}
 	checking = NULL;
-	checking = GetBallFromTile(tile.x + 1, tile.y - 1);
+	if (tile.y % 2 != 0)
+	{
+		checking = GetBallFromTile(tile.x + 1, tile.y - 1);
+	}
+	else
+	{
+		checking = GetBallFromTile(tile.x - 1, tile.y - 1);
+	}
 	if (checking && checking->color == ball->color)
 	{
 		if (!IsChecked(checking, toCheck, checked))

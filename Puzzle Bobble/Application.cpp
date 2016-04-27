@@ -9,6 +9,7 @@
 #include "ModulePlayer.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleBall.h"
+#include "ModuleSceneCongrat.h"
 
 Application::Application()
 {
@@ -18,10 +19,12 @@ Application::Application()
 	modules[3] = textures = new ModuleTextures();
 	modules[4] = scene_menu = new ModuleSceneMenu();
 	modules[5] = scene_level = new ModuleSceneLevel();
+
 	modules[6] = player = new ModulePlayer();
 	modules[7] = fade = new ModuleFadeToBlack();
 	modules[8] = audio = new ModuleAudio();
 	modules[9] = ball_controll = new ModuleBall();
+	modules[10] = scene_congrat = new ModuleSceneCongrat();
 }	
 
 Application::~Application()
@@ -37,6 +40,7 @@ bool Application::Init()
 	// Player will be enabled on the first update of a new scene
 	player->Disable();
 	// Disable the map that you do not start with
+	scene_congrat->Disable();
 	scene_level->Disable();
 	ball_controll->Disable();
 	for(int i = 0; i < NUM_MODULES && ret == true; ++i)

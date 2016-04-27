@@ -117,7 +117,7 @@ ModuleSceneLevel::~ModuleSceneLevel()
 bool ModuleSceneLevel::Start()
 {
 	LOG("Loading lvl scene");
-	App->ball_controll->CreateBall();
+	
 	graphics = App->textures->Load("Level1.png");
 	graphics_sprite = App->textures->Load("spritespuzzle.png");
 
@@ -141,7 +141,24 @@ bool ModuleSceneLevel::Start()
 	App->ball_controll->AddBall(5, 1, BLUE);
 	App->ball_controll->AddBall(6, 1, GREEN);
 	App->ball_controll->AddBall(7, 1, GREEN);
+	////
+	App->ball_controll->AddBall(0, 2, BLUE);
+	App->ball_controll->AddBall(1, 2, BLUE);
+	App->ball_controll->AddBall(2, 2, GREEN);
+	App->ball_controll->AddBall(3, 2, GREEN);
+	App->ball_controll->AddBall(4, 2, RED);
+	App->ball_controll->AddBall(5, 2, RED);
+	App->ball_controll->AddBall(6, 2, YELLOW);
+	App->ball_controll->AddBall(7, 2, YELLOW);// Bobble level
+	App->ball_controll->AddBall(0, 3, BLUE);
+	App->ball_controll->AddBall(1, 3, GREEN);
+	App->ball_controll->AddBall(2, 3, GREEN);
+	App->ball_controll->AddBall(3, 3, RED);
+	App->ball_controll->AddBall(4, 3, RED);
+	App->ball_controll->AddBall(5, 3, YELLOW);
+	App->ball_controll->AddBall(6, 3, YELLOW);
 
+	App->ball_controll->CreateBall();
 	App->player->Enable();
 	App->ball_controll->Enable();
 	return true;
@@ -186,7 +203,7 @@ update_status ModuleSceneLevel::Update()
 		//App->render->Blit(graphics, 0, 170, &ground);
 		
 
-	if (App->input->keyboard[SDL_SCANCODE_1] == KEY_DOWN)
+	/*if (App->input->keyboard[SDL_SCANCODE_1] == KEY_DOWN)
 	{
 	//	App->ball_controll->GetPos( pos_x,  pos_y);
 
@@ -198,7 +215,7 @@ update_status ModuleSceneLevel::Update()
 			
 
 
-	}
+	}*/
 
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT)
 	{	
@@ -228,9 +245,13 @@ update_status ModuleSceneLevel::Update()
 	{
 		if (App->ball_controll->moving_ball != NULL)
 		{
-			App->ball_controll->ShootBall(shoot_angle);
+			if (App->ball_controll->moving_ball->moving == false)
+			{
+				App->ball_controll->ShootBall(shoot_angle);
 			pipe.speed = 0.02f;
 			App->render->Blit(graphics_sprite, 154, 215, &(pipe.GetCurrentFrame()), 0.75f);
+			}
+			
 		}
 		Mix_PlayChannel(-1, throw_effect, 0);
 	}

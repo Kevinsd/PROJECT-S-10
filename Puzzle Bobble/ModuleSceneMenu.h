@@ -31,4 +31,4 @@ public:
 	Mix_Chunk* go_level = nullptr;
 };
 
-#endif // __MODULESCENEHONDA_H__
+#endif // __MODULESCENEHONDA_H__if (array.size() == 0)
