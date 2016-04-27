@@ -26,7 +26,6 @@ public:
 		current_frame += speed;
 		if(current_frame >= last_frame)
 			current_frame = 0;
-		//else if(current_frame ==
 
 		return frames[(int)current_frame];
 	}

@@ -23,8 +23,9 @@ ModuleSceneLevel::ModuleSceneLevel()
 	// Pipe
 
 	pipe.PushBack({338,1087,13,11});
-	pipe.PushBack({ 354, 1081, 13, 18 });
-	pipe.speed = 0.0f;
+
+	pipe2.PushBack({ 338, 1087, 13, 11 });
+	
 	// Background / sky
 	background.x = 0;
 	background.y = 0;
@@ -46,19 +47,8 @@ ModuleSceneLevel::ModuleSceneLevel()
 	
 	bub.speed = 0.3f;
 
-	//launcher 
-/*	launcher2.x = 50;
-	launcher2.y = 1020;
-	launcher2.w = 56;
-	launcher2.h=40 ;
-	*/
-	//Bag
-	bag.x = 358;
-	bag.y = 833;
-	bag.w = 56;
-	bag.h = 24;
-
 	//launcher animation
+
 	launcher.PushBack({ 50, 1020, 56, 40 });
 	launcher.PushBack({ 50, 1077, 56, 40 });
 	launcher.PushBack({ 50, 1131, 56, 40 });
@@ -72,7 +62,7 @@ ModuleSceneLevel::ModuleSceneLevel()
 	launcher.PushBack({ 248, 1077, 56, 40 });
 	launcher.PushBack({ 248, 1131, 56, 40 });
 
-	launcher.speed = 0.0f;
+	launcher.speed = 0.3f;
 	/*launcher.PushBack({ 50, 1020, 56, 40 });//2003
 	launcher.PushBack({ 121, 2108, 111, 80 });
 	launcher.PushBack({ 121, 2212, 111, 80 });
@@ -104,7 +94,7 @@ bool ModuleSceneLevel::Start()
 {
 	LOG("Loading lvl scene");
 	
-	graphics = App->textures->Load("Level1.png");
+	graphics = App->textures->Load("Level2.png");
 	graphics_sprite = App->textures->Load("spritespuzzle.png");
 
 	App->audio->PlayMusic("level_music.ogg", 1.0f);
@@ -127,18 +117,15 @@ bool ModuleSceneLevel::CleanUp()
 update_status ModuleSceneLevel::Update()
 {
 	
+
 	// Draw everything --------------------------------------
 	App->render->Blit(graphics, 0, 0, &background);
-
-
+	App->render->Blit(graphics_sprite, 130, 192, &(launcher.GetCurrentFrame()), 0.75f); // launcher animation
+	
+	
 	// Bub
-	
-	
-	launcher.speed = 0.0f;
-	App->render->Blit(graphics_sprite, 130, 192, &(launcher.GetCurrentFrame()), 0.75f); // launcher 
-	pipe.speed = 0.0f;
-	App->render->Blit(graphics_sprite, 154, 215, &(pipe.GetCurrentFrame()), 0.75f);
-
+	App->render->Blit(graphics_sprite, 172 ,213, &(bub.GetCurrentFrame()),0.02f ); // Bub animation
+		
 	//	App->render->Blit(graphics, 0, (int)foreground_pos, &foreground, 0.92f);
 	//	App->render->Blit(graphics, 253, (int)foreground_pos, &foreground, 0.92f);
 
@@ -161,26 +148,15 @@ update_status ModuleSceneLevel::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT)
 	{	
-		if (shoot_angle <= 170){
-			launcher.speed = 0.3f;
-			App->render->Blit(graphics_sprite, 130, 192, &(launcher.GetCurrentFrame()), 0.75f); // launcher animation
+		if (shoot_angle <=170)
 
-			App->render->Blit(graphics_sprite, 172, 213, &(bub.GetCurrentFrame()), 0.02f); // Bub animation
-			shoot_angle += 1;
-		}
+		shoot_angle += 1;
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_REPEAT)
 	{	
 		if (shoot_angle >= 10)
-		{
-			launcher.speed = 0.3f;
-			App->render->Blit(graphics_sprite, 130, 192, &(launcher.GetCurrentFrame()), 0.75f); // launcher animation
-
-			App->render->Blit(graphics_sprite, 174, 213, &(bub.GetCurrentFrame()), 0.02f); // Bub animation
-
-			shoot_angle -= 1;
-		}
+		shoot_angle -= 1;
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN)
@@ -188,12 +164,9 @@ update_status ModuleSceneLevel::Update()
 		if (App->ball_controll->moving_ball != NULL)
 		{
 			App->ball_controll->ShootBall(shoot_angle);
-			pipe.speed = 0.02f;
-			App->render->Blit(graphics_sprite, 154, 215, &(pipe.GetCurrentFrame()), 0.75f);
+			App->render->Blit(graphics_sprite, 154, 215, &(pipe2.GetCurrentFrame()), 0.75f);
 		}
 	}
-
-	App->render->Blit(graphics_sprite, 86, 209, &bag, 0.75f); // Bag 
-
+	App->render->Blit(graphics_sprite, 154, 215, &(pipe.GetCurrentFrame()), 0.75f);
 	return UPDATE_CONTINUE;
 }
