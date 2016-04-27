@@ -1,5 +1,8 @@
-#include "Ball.h"
+#include "Application.h"
+#include "ModuleBall.h"
+//#include "Ball.h"
 #include <math.h>
+
 
 Ball::Ball(float pos_x, float pos_y, int radius, Color supercolor) :x(pos_x), y(pos_y), rad(radius), color(supercolor)
 {
@@ -29,7 +32,13 @@ bool Ball::Move()
 		vel_x = cos(angle)*velocity;
 		x += vel_x;
 		y -= vel_y;
+		App->ball_controll->Collision();
 
+		if (App->ball_controll->Collision() == true)
+		{
+			moving = false;
+			return false;
+		}
 		if (x+rad >= 224)
 		{
 			x = 224 - rad;

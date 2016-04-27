@@ -25,6 +25,7 @@ public:
 	SDL_Texture* graphics = nullptr;
 //	SDL_Rect launcher2;
 	SDL_Rect bag;
+	SDL_Rect wheel;
 	SDL_Rect ballsprite_blue;
 	SDL_Rect ballsprite_red;
 	SDL_Rect ballsprite_yellow;
@@ -36,6 +37,7 @@ public:
 	Animation pipe;
 //	Animation pipe2;
 	Animation bub;
+	Animation bub_static;
 	Animation launcher;
 
 

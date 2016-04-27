@@ -39,20 +39,19 @@ update_status ModuleBall::Update()
 {
 	for (unsigned int i = 0; i < array.size(); i++)
 	{
+		if (array[i]->color == BLUE)
+		App->render->Blit(App->scene_level->graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_blue);
+		else if (array[i]->color == GRAY)
+		App->render->Blit(App->scene_level->graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_gray);
+		else if (array[i]->color == RED)
+		App->render->Blit(App->scene_level->graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_red);
+		else if (array[i]->color == GREEN)
+		App->render->Blit(App->scene_level->graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_green);
+		else if (array[i]->color == YELLOW)
+		App->render->Blit(App->scene_level->graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_yellow);
+		else if (array[i]->color == PURPLE)
+		App->render->Blit(App->scene_level->graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_purple);
 		
-			App->render->Blit(App->scene_level->graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_blue);
-			if (moving_ball != NULL)
-			{
-				App->render->Blit(App->scene_level->graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_gray);
-
-				App->render->Blit(App->scene_level->graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_red);
-
-				App->render->Blit(App->scene_level->graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_green);
-
-				App->render->Blit(App->scene_level->graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_yellow);
-
-				App->render->Blit(App->scene_level->graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_purple);
-			}
 	}
 	if (moving_ball != NULL)
 	{
@@ -65,7 +64,11 @@ update_status ModuleBall::Update()
 				p2Point <int> get_pos = GetPos(moving_ball->x,moving_ball->y);
 				unsigned int index = get_pos.y * 8 + get_pos.x;
 				moving_ball->x= (int)moving_ball->x / 16 * 16 + 8;//look there
-				moving_ball->y=(int)moving_ball->y / 16 * 16 ;
+				moving_ball->y=(int)moving_ball->y / 16 * 16 + 1;
+				if ((int)((24 - moving_ball->y) / 16) % 2 != 0)
+				{
+					moving_ball->x += 8;
+				}
 				array.push_back(moving_ball); 
 				moving_ball = NULL;
 
@@ -114,10 +117,26 @@ void ModuleBall::CreateBall()
 p2Point <int>  ModuleBall::GetPos(int x, int y)
 {
 	 
-	int pos_y = y / 16;
+	int pos_y = y /16;
 	int pos_x = x/16;
 
 	p2Point <int> ret = { pos_x, pos_y };
 	
 	return ret;
+}
+bool ModuleBall::Collision()
+{
+	for (unsigned int i = 0; i < array.size(); i++)
+	{
+		int dist_x = moving_ball->x - array[i]->x;
+		int dist_y = moving_ball->y - array[i]->y;
+		dist_x = dist_x*dist_x;
+		dist_y = dist_y*dist_y;
+		int dist_final = sqrt((float)dist_x + (float)dist_y);
+		if (moving_ball->rad + array[i]->rad >= dist_final)
+		{
+			return true;
+		}
+	}
+	return false;
 }

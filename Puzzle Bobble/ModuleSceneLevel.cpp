@@ -31,8 +31,21 @@ ModuleSceneLevel::ModuleSceneLevel()
 	background.w = 320;
 	background.h = 240;
 	
-	// Launcher Animation
+	// Rueda Animation
+	wheel.x = 320;
+	wheel.y = 789;
+	wheel.w = 16;
+	wheel.h = 16;
 
+	// Bub animation static
+	bub_static.PushBack({ 114, 53 , 24, 19 });
+	bub_static.PushBack({ 147,53, 24, 19 });
+	bub_static.PushBack({182, 53, 24, 19 });
+	bub_static.PushBack({ 216, 53, 24, 19 });
+	bub_static.PushBack({ 249, 53, 24, 19 });
+	bub_static.PushBack({ 283, 53, 24, 19 });
+	
+	bub_static.speed = 0.039f;
 
 	// bub animation
 	bub.PushBack({8, 220, 27, 19});
@@ -130,6 +143,10 @@ update_status ModuleSceneLevel::Update()
 	// Draw everything --------------------------------------
 	App->render->Blit(graphics, 0, 0, &background);
 
+	//wheel
+
+	App->render->Blit(graphics, 179, 213, &wheel);
+
 
 	// Bub
 	
@@ -138,6 +155,8 @@ update_status ModuleSceneLevel::Update()
 	App->render->Blit(graphics_sprite, 130, 192, &(launcher.GetCurrentFrame()), 0.75f); // launcher 
 	pipe.speed = 0.0f;
 	App->render->Blit(graphics_sprite, 154, 215, &(pipe.GetCurrentFrame()), 0.75f);
+
+	App->render->Blit(graphics_sprite, 179, 213, &(bub_static.GetCurrentFrame()), 0.75f);
 
 	//	App->render->Blit(graphics, 0, (int)foreground_pos, &foreground, 0.92f);
 	//	App->render->Blit(graphics, 253, (int)foreground_pos, &foreground, 0.92f);
@@ -161,18 +180,18 @@ update_status ModuleSceneLevel::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT)
 	{	
-		if (shoot_angle <= 170){
+		if (shoot_angle <= 165){
 			launcher.speed = 0.3f;
 			App->render->Blit(graphics_sprite, 130, 192, &(launcher.GetCurrentFrame()), 0.75f); // launcher animation
 
-			App->render->Blit(graphics_sprite, 172, 213, &(bub.GetCurrentFrame()), 0.02f); // Bub animation
+			App->render->Blit(graphics_sprite, 174, 213, &(bub.GetCurrentFrame()), 0.02f); // Bub animation
 			shoot_angle += 1;
 		}
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_REPEAT)
 	{	
-		if (shoot_angle >= 10)
+		if (shoot_angle >= 15)
 		{
 			launcher.speed = 0.3f;
 			App->render->Blit(graphics_sprite, 130, 192, &(launcher.GetCurrentFrame()), 0.75f); // launcher animation

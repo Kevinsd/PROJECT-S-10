@@ -20,8 +20,10 @@ public:
 	bool Start();
 	update_status Update ();
 	bool CleanUp();
+	bool Collision();
 	void ShootBall(float);
 	void CreateBall();
+	
 	p2Point <int> GetPos(int,int);
 
 	Ball* moving_ball = nullptr;
