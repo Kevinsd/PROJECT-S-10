@@ -32,6 +32,7 @@ public:
 	SDL_Rect ballsprite_orange;
 	SDL_Rect ballsprite_grease;
 	SDL_Rect ballsprite_purple;
+	SDL_Rect arrowRect;
 	SDL_Rect foreground;
 	SDL_Rect background;
 	Animation pipe;

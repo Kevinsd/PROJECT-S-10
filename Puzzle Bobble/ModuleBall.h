@@ -20,11 +20,17 @@ public:
 	bool Start();
 	update_status Update ();
 	bool CleanUp();
-	bool Collision();
+	Ball* Collision();
 	bool CheckTile(int,int);
+	void Check_Pop(Ball* ball);
+	void CheckSoroundings(Ball*, Vector<Ball*>&, Vector<Ball*>&);
+	Ball* GetBallFromTile(int x, int y);
+	bool IsChecked(Ball* ball, Vector<Ball*>& toCheck, Vector<Ball*>& checked);
 	void ShootBall(float);
 	void CreateBall();
-	
+	void AddBall(int tile_x, int tile_y, Color color);
+	p2Point<int> CheckClosestEmpty(Ball* collided, Ball* toMove);
+
 	p2Point <int> GetTile(int,int);
 	p2Point <int> GetPos(int x, int y);
 

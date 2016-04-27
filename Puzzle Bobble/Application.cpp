@@ -38,7 +38,7 @@ bool Application::Init()
 	player->Disable();
 	// Disable the map that you do not start with
 	scene_level->Disable();
-
+	ball_controll->Disable();
 	for(int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();
 

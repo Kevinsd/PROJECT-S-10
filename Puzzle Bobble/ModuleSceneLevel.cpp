@@ -59,6 +59,7 @@ ModuleSceneLevel::ModuleSceneLevel()
 	
 	bub.speed = 0.3f;
 
+	arrowRect = { 15, 514, 22, 55 };
 	//launcher 
 /*	launcher2.x = 50;
 	launcher2.y = 1020;
@@ -116,23 +117,42 @@ ModuleSceneLevel::~ModuleSceneLevel()
 bool ModuleSceneLevel::Start()
 {
 	LOG("Loading lvl scene");
-	
+	App->ball_controll->CreateBall();
 	graphics = App->textures->Load("Level1.png");
 	graphics_sprite = App->textures->Load("spritespuzzle.png");
 
 	App->audio->PlayMusic("level_music.ogg", 1.0f);
 	
+	App->ball_controll->AddBall(0, 0, RED);
+	App->ball_controll->AddBall(1, 0, RED);
+	App->ball_controll->AddBall(2, 0, YELLOW);
+	App->ball_controll->AddBall(3, 0, YELLOW);
+	App->ball_controll->AddBall(4, 0, BLUE);
+	App->ball_controll->AddBall(5, 0, BLUE);
+	App->ball_controll->AddBall(6, 0, GREEN);
+	App->ball_controll->AddBall(7, 0, GREEN);// Bobble level
+	App->ball_controll->AddBall(0, 1, RED);
+	App->ball_controll->AddBall(1, 1, RED);
+	App->ball_controll->AddBall(2, 1, YELLOW);
+	App->ball_controll->AddBall(3, 1, YELLOW);
+	App->ball_controll->AddBall(4, 1, BLUE);
+	App->ball_controll->AddBall(5, 1, BLUE);
+	App->ball_controll->AddBall(6, 1, GREEN);
+	App->ball_controll->AddBall(7, 1, GREEN);
+
 	App->player->Enable();
-	
+	App->ball_controll->Enable();
 	return true;
 }
 
 // UnLoad assets
 bool ModuleSceneLevel::CleanUp()
 {
+
 	LOG("Unloading lvl scene");
 	App->player->Disable();
-
+	if (App->ball_controll->IsEnabled())
+		App->ball_controll->Disable();
 	return true;
 }
 
@@ -212,6 +232,7 @@ update_status ModuleSceneLevel::Update()
 		}
 	}
 
+	App->render->Blit(graphics_sprite, 151, 180, &arrowRect, 1.0f, 90-shoot_angle);
 	App->render->Blit(graphics_sprite, 86, 209, &bag, 0.75f); // Bag 
 
 	return UPDATE_CONTINUE;

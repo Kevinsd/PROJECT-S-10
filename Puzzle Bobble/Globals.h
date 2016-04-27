@@ -20,6 +20,7 @@ enum update_status
 // Useful typedefs ---------
 typedef unsigned int uint;
 
+#define INT_MAX 2147483647
 // Configuration -----------
 #define SCREEN_SIZE 2
 #define SCREEN_WIDTH 320  //320

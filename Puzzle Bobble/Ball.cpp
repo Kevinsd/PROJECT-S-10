@@ -33,8 +33,8 @@ bool Ball::Move()
 		x += vel_x;
 		y -= vel_y;
 		App->ball_controll->Collision();
-
-		if (App->ball_controll->Collision() == true)
+		collidedBall = App->ball_controll->Collision();
+		if (collidedBall)
 		{
 			moving = false;
 			return false;

@@ -19,6 +19,7 @@ public:
 	float velocity = 2;
 	bool moving = false;
 	Color color;
+	Ball* collidedBall;
 
 	Ball();
 	Ball(float x, float y, int rad, Color color);
