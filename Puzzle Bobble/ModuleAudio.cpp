@@ -119,6 +119,7 @@ bool ModuleAudio::PlayMusic(const char* path, float fade_time)
 	return ret;
 }
 
+
 // Load WAV
 uint ModuleAudio::LoadFx(const char* path)
 {
@@ -137,7 +138,7 @@ uint ModuleAudio::LoadFx(const char* path)
 
 	return ret;
 }
-
+/*
 // UnLoad WAV
 bool ModuleAudio::UnLoadFx(uint id)
 {
@@ -165,4 +166,15 @@ bool ModuleAudio::PlayFx(uint id, int repeat)
 	}
 
 	return ret;
+}
+*/
+
+Mix_Chunk* const ModuleAudio::Load_effects(const char *path)
+{
+	Mix_Chunk* effect = Mix_LoadWAV(path);
+	effects[last_effect++] = effect;
+
+	LOG("Loading Music\n");
+
+	return effect;
 }

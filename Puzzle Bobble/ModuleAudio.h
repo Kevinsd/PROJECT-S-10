@@ -12,11 +12,16 @@ class ModuleAudio : public Module
 {
 public:
 
+
 	ModuleAudio();
 	~ModuleAudio();
 
 	bool Init();
 	bool CleanUp();
+
+	//Effects declarations
+	Mix_Chunk* effects[MAX_FX];
+	uint last_effect = 0;
 
 	// Play a music file
 	bool PlayMusic(const char* path, float fade_time = DEFAULT_MUSIC_FADE_TIME);
@@ -26,7 +31,8 @@ public:
 	bool UnLoadFx(uint id);
 
 	// Play a previously loaded WAV
-	bool PlayFx(unsigned int fx, int repeat = 0);
+	//bool PlayFx(unsigned int fx, int repeat = 0);
+	Mix_Chunk* const Load_effects(const char* path);
 
 private:
 
