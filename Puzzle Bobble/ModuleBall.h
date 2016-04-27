@@ -21,10 +21,12 @@ public:
 	update_status Update ();
 	bool CleanUp();
 	bool Collision();
+	bool CheckTile(int,int);
 	void ShootBall(float);
 	void CreateBall();
 	
-	p2Point <int> GetPos(int,int);
+	p2Point <int> GetTile(int,int);
+	p2Point <int> GetPos(int x, int y);
 
 	Ball* moving_ball = nullptr;
 	Vector<Ball*> array;

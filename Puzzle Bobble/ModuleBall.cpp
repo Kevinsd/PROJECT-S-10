@@ -3,7 +3,7 @@
 #include "ModuleSceneLevel.h"
 #include "ModuleRender.h"
 #include "SDL/include/SDL.h"
-
+#include "Globals.h"
 #include <stdlib.h>
 
 ModuleBall::ModuleBall()
@@ -61,14 +61,13 @@ update_status ModuleBall::Update()
 			if (moving_ball->Move() == false)
 			{
 				
-				p2Point <int> get_pos = GetPos(moving_ball->x,moving_ball->y);
-				unsigned int index = get_pos.y * 8 + get_pos.x;
-				moving_ball->x= (int)moving_ball->x / 16 * 16 + 8;//look there
-				moving_ball->y=(int)moving_ball->y / 16 * 16 + 1;
-				if ((int)((24 - moving_ball->y) / 16) % 2 != 0)
-				{
-					moving_ball->x += 8;
-				}
+				p2Point <int> get_tile = GetTile(moving_ball->x,moving_ball->y);
+				p2Point <int> get_pos = GetPos(get_tile.x, get_tile.y);
+
+				CheckTile(get_tile.x, get_tile.y);
+				moving_ball->x= get_pos.x;//look there
+				moving_ball->y= get_pos.y;
+				
 				array.push_back(moving_ball); 
 				moving_ball = NULL;
 
@@ -114,15 +113,61 @@ void ModuleBall::CreateBall()
 	moving_ball = new Ball(162, 208, 8, type); //look
 	
 }
-p2Point <int>  ModuleBall::GetPos(int x, int y)
+p2Point <int>  ModuleBall::GetTile(int x, int y)
 {
-	 
-	int pos_y = y /16;
-	int pos_x = x/16;
+	x = x - 96 - 8;
+	y = y - 24 - 8;	
+	int pos_y = 0;
+	int pos_x = 0;
+	pos_y = y  / 16;
+	
+	if (pos_y % 2 != 0)
+	{
+		x += 8;
+		pos_x = x / 16;		
+	}
+	else
+	{
 
+		pos_x = x / 16 ;
+		if (pos_x != 0)
+		{
+			pos_x += 1;
+		}
+	}
+	LOG("x:%i,y;%i", pos_x, pos_y);
 	p2Point <int> ret = { pos_x, pos_y };
 	
 	return ret;
+}
+
+p2Point <int> ModuleBall::GetPos(int x , int y)
+{
+	p2Point <int> ret;
+	ret.y = y * 16 + 24 + 8;
+	if (y % 2 != 0)
+	{
+		ret.x = x * 16 + 96 + 16;
+	}
+	else
+	{
+		ret.x = x * 16 + 96 + 8;
+	}
+	return ret;
+}
+bool ModuleBall::CheckTile(int x, int y)
+{
+	p2Point <int> pos = GetPos(x, y);
+
+	for (unsigned int i = 0; i < array.size(); i++)
+	{
+		
+		if (array[i]->x  == pos.x && array[i]->y  == pos.y)
+			{
+				LOG(" casilla col ");
+				return true;	
+			}
+	}
 }
 bool ModuleBall::Collision()
 {
