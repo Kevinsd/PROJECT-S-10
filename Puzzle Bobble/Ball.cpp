@@ -25,7 +25,9 @@ bool Ball::Move()
 {
 	float vel_x = 0;
 	float vel_y = 0;
+	
 	if (moving)
+		
 	{
 
 		vel_y = sin(angle)*velocity;
@@ -43,12 +45,14 @@ bool Ball::Move()
 		{
 			x = 224 - rad;
 			angle = 3.14 - angle;
+			 flash = true;
 		}
 
 		if (x-rad <= 96)
 		{
 			x = 96 + rad;
 			angle = 3.14 - angle;
+			 flash = true;
 		}
 
 
@@ -57,6 +61,7 @@ bool Ball::Move()
 		{
 			moving = false;
 			y = 24 + rad;
+			bool flash = true;
 			return false;
 		}
 

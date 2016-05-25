@@ -164,7 +164,7 @@ void ModuleBall::CreateBall()
 	}
 	else
 		type = static_cast<Color>(rand() % 3);
-	moving_ball = new Ball(162, 208, 8, type); //look
+		moving_ball = new Ball(129, 224, 8, type); //look (162, 208, 8, type)
 }
 
 void ModuleBall::AddBall(int tile_x, int tile_y, Color color)

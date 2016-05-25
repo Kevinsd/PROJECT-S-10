@@ -18,6 +18,7 @@ public:
 	float angle = 0;
 	float velocity = 3;
 	bool moving = false;
+	bool flash;
 	Color color;
 	Ball* collidedBall;
 

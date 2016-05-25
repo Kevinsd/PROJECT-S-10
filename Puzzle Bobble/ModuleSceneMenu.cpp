@@ -36,11 +36,11 @@ bool ModuleSceneMenu::Start()
 {
 	LOG("Loading background assets");
 	bool ret = true;
-	graphics = App->textures->Load("Menu2.png");
+	graphics = App->textures->Load("Sprites and sound/Menu2.png");
 
-	App->audio->PlayMusic("intro_music.ogg", 1.0f);
+	App->audio->PlayMusic("Sprites and sound/intro_music.ogg", 1.0f);
 
-	go_level = App->audio->Load_effects("Go_level.wav");
+	go_level = App->audio->Load_effects("Sprites and sound/Go_level.wav");
 
 	App->player->Enable();
 
@@ -50,7 +50,7 @@ bool ModuleSceneMenu::Start()
 // Load assets
 bool ModuleSceneMenu::CleanUp()
 {
-	LOG("Unloading honda stage");
+	LOG("Unloading stage");
 	App->player->Disable();
 	return true;
 }

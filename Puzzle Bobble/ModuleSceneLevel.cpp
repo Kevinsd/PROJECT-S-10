@@ -12,6 +12,7 @@
 #include "Vector.h"
 
 
+
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
 ModuleSceneLevel::ModuleSceneLevel()
@@ -118,12 +119,12 @@ bool ModuleSceneLevel::Start()
 {
 	LOG("Loading lvl scene");
 	
-	graphics = App->textures->Load("Level1.png");
-	graphics_sprite = App->textures->Load("spritespuzzle.png");
+	graphics = App->textures->Load("Sprites and sound/Level1.png");
+	graphics_sprite = App->textures->Load("Sprites and sound/spritespuzzle.png");
 
-	App->audio->PlayMusic("level_music.ogg", 1.0f);
+	App->audio->PlayMusic("Sprites and sound/level_music.ogg", 1.0f);
 
-	throw_effect = App->audio->Load_effects("throw_effect.wav");
+	throw_effect = App->audio->Load_effects("Sprites and sound/throw_effect.wav");
 	
 	App->ball_controll->AddBall(0, 0, RED);
 	App->ball_controll->AddBall(1, 0, RED);
@@ -216,7 +217,10 @@ update_status ModuleSceneLevel::Update()
 
 
 	}*/
-
+	if (App->ball_controll->moving_ball->flash==true)
+	{
+		
+	}
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT)
 	{	
 		if (shoot_angle <= 165){
