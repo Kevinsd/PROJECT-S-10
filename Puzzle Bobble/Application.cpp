@@ -10,6 +10,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleBall.h"
 #include "ModuleSceneCongrat.h"
+#include "ModuleSceneLevel8.h"
 
 Application::Application()
 {
@@ -19,12 +20,13 @@ Application::Application()
 	modules[3] = textures = new ModuleTextures();
 	modules[4] = scene_menu = new ModuleSceneMenu();
 	modules[5] = scene_level = new ModuleSceneLevel();
-
-	modules[6] = player = new ModulePlayer();
-	modules[7] = fade = new ModuleFadeToBlack();
-	modules[8] = audio = new ModuleAudio();
-	modules[9] = ball_controll = new ModuleBall();
-	modules[10] = scene_congrat = new ModuleSceneCongrat();
+	modules[6] = scene_level8 = new ModuleSceneLevel8();
+	modules[7] = player = new ModulePlayer();
+	modules[8] = fade = new ModuleFadeToBlack();
+	modules[9] = audio = new ModuleAudio();
+	modules[10] = ball_controll = new ModuleBall();
+	modules[11] = scene_congrat = new ModuleSceneCongrat();
+	
 }	
 
 Application::~Application()
@@ -42,6 +44,7 @@ bool Application::Init()
 	// Disable the map that you do not start with
 	scene_congrat->Disable();
 	scene_level->Disable();
+	scene_level8->Disable();
 	ball_controll->Disable();
 	for(int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();
