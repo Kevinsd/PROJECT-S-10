@@ -35,6 +35,7 @@ public:
 	p2Point <int> GetTile(int,int);
 	p2Point <int> GetPos(int x, int y);
 
+	Ball* recharge_ball = nullptr;
 	Ball* moving_ball = nullptr;
 	Vector<Ball*> array;
 	SDL_Rect ballsprite_blue;

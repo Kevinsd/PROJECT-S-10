@@ -120,6 +120,22 @@ update_status ModuleBall::Update()
 				App->render->Blit(App->scene_level->graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_purple);
 		}
 	}
+	if (recharge_ball != NULL)
+	{
+		if (recharge_ball->color == BLUE)
+			App->render->Blit(App->scene_level->graphics_sprite, recharge_ball->x - 8, recharge_ball->y - 8, &ballsprite_blue);
+		if (recharge_ball->color == GRAY)
+			App->render->Blit(App->scene_level->graphics_sprite, recharge_ball->x - 8, recharge_ball->y - 8, &ballsprite_gray);
+		if (recharge_ball->color == RED)
+			App->render->Blit(App->scene_level->graphics_sprite, recharge_ball->x - 8, recharge_ball->y - 8, &ballsprite_red);
+		if (recharge_ball->color == GREEN)
+			App->render->Blit(App->scene_level->graphics_sprite, recharge_ball->x - 8, recharge_ball->y - 8, &ballsprite_green);
+		if (recharge_ball->color == YELLOW)
+			App->render->Blit(App->scene_level->graphics_sprite, recharge_ball->x - 8, recharge_ball->y - 8, &ballsprite_yellow);
+		if (recharge_ball->color == PURPLE)
+			App->render->Blit(App->scene_level->graphics_sprite, recharge_ball->x - 8, recharge_ball->y - 8, &ballsprite_purple);
+
+	}
 	return UPDATE_CONTINUE;
 }
 
@@ -139,8 +155,11 @@ bool ModuleBall::CleanUp()
 
 void ModuleBall::ShootBall(float shoot)
 {
-	if (moving_ball!=NULL)
+	if (moving_ball != NULL)
+	{
 		moving_ball->Shoot(shoot);
+	}
+
 }
 
 void ModuleBall::CreateBall()
@@ -170,7 +189,25 @@ void ModuleBall::CreateBall()
 	}
 	else
 		type = static_cast<Color>(rand() % 3);
-		moving_ball = new Ball(129, 224, 8, type); //look (162, 208, 8, type)
+
+	if (recharge_ball == NULL)
+	{
+		Color type2;
+		if (vector.size())
+		{
+			uint index = rand() % vector.size();
+			type2 = vector[index];
+		}
+		else
+			type2 = static_cast<Color>(rand() % 3);
+		recharge_ball = new Ball(129, 244, 8, type);
+	}
+	moving_ball = recharge_ball;
+	moving_ball->x = 162;
+	moving_ball->y = 208;
+
+	recharge_ball = new Ball(129, 224, 8, type); //look (162, 208, 8, type)
+
 }
 
 void ModuleBall::AddBall(int tile_x, int tile_y, Color color)
