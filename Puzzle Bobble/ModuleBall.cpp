@@ -24,8 +24,10 @@ bool ModuleBall::Init()
 	ballsprite_gray = { 12, 286, 16, 16 };
 	ballsprite_red = { 12, 312, 16, 16 };
 	ballsprite_yellow = { 12, 338, 16, 16 };
-	ballsprite_purple = { 12, 211, 16, 16 };
-	ballsprite_green = { 318, 260, 16, 16 };
+	ballsprite_purple = { 338, 338, 16, 16 };
+	ballsprite_green = { 338, 260, 16, 16 };
+	ballsprite_black = { 338, 286, 16, 16 };
+	ballsprite_orange = { 338, 312, 16, 16 };
 
 
 	return true;
@@ -53,6 +55,10 @@ update_status ModuleBall::Update()
 		App->render->Blit(App->scene_level->graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_yellow);
 		else if (array[i]->color == PURPLE)
 		App->render->Blit(App->scene_level->graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_purple);
+		else if (array[i]->color == BLACK)
+			App->render->Blit(App->scene_level->graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_black);
+		else if (array[i]->color == ORANGE)
+			App->render->Blit(App->scene_level->graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_orange);
 		
 	}
 	if (moving_ball != NULL)

@@ -43,6 +43,8 @@ public:
 	SDL_Rect ballsprite_red;
 	SDL_Rect ballsprite_gray;
 	SDL_Rect ballsprite_purple;
+	SDL_Rect ballsprite_black;
+	SDL_Rect ballsprite_orange;
 private:
 
 

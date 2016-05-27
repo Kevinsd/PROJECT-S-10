@@ -11,6 +11,7 @@
 #include "ModuleBall.h"
 #include "ModuleSceneCongrat.h"
 #include "ModuleSceneLevel8.h"
+#include "ModuleSceneLevel9.h"
 
 Application::Application()
 {
@@ -21,11 +22,12 @@ Application::Application()
 	modules[4] = scene_menu = new ModuleSceneMenu();
 	modules[5] = scene_level = new ModuleSceneLevel();
 	modules[6] = scene_level8 = new ModuleSceneLevel8();
-	modules[7] = player = new ModulePlayer();
-	modules[8] = fade = new ModuleFadeToBlack();
-	modules[9] = audio = new ModuleAudio();
-	modules[10] = ball_controll = new ModuleBall();
-	modules[11] = scene_congrat = new ModuleSceneCongrat();
+	modules[7] = scene_level9 = new ModuleSceneLevel9();
+	modules[8] = player = new ModulePlayer();
+	modules[9] = fade = new ModuleFadeToBlack();
+	modules[10] = audio = new ModuleAudio();
+	modules[11] = ball_controll = new ModuleBall();
+	modules[12] = scene_congrat = new ModuleSceneCongrat();
 	
 }	
 
@@ -42,9 +44,11 @@ bool Application::Init()
 	// Player will be enabled on the first update of a new scene
 	player->Disable();
 	// Disable the map that you do not start with
-	scene_congrat->Disable();
+	
 	scene_level->Disable();
 	scene_level8->Disable();
+	scene_level9->Disable();
+	scene_congrat->Disable();
 	ball_controll->Disable();
 	for(int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();

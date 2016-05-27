@@ -1,5 +1,5 @@
-#ifndef __MODULESCENELEVEL_H__
-#define __MODULESCENELEVEL_H__
+#ifndef __MODULESCENELEVEL9_H__
+#define __MODULESCENELEVEL9_H__
 
 #include "Module.h"
 #include "Animation.h"
@@ -8,11 +8,11 @@
 
 struct SDL_Texture;
 
-class ModuleSceneLevel : public Module
+class ModuleSceneLevel9 : public Module
 {
 public:
-	ModuleSceneLevel();
-	~ModuleSceneLevel();
+	ModuleSceneLevel9();
+	~ModuleSceneLevel9();
 
 	bool Start();
 	update_status Update();
@@ -24,7 +24,7 @@ public:
 	SDL_Texture* graphics_sprite = nullptr;
 	SDL_Texture* graphics_sprite_launcher = nullptr;
 	SDL_Texture* graphics = nullptr;
-//	SDL_Rect launcher2;
+	//	SDL_Rect launcher2;
 	SDL_Rect bag;
 	SDL_Rect wheel;
 	SDL_Rect ballsprite_blue;
@@ -37,7 +37,7 @@ public:
 	SDL_Rect foreground;
 	SDL_Rect background;
 	Animation pipe;
-//	Animation pipe2;
+	//	Animation pipe2;
 	Animation bub;
 	Animation bub2;
 	Animation bub_static;

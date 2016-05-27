@@ -3,6 +3,7 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleSceneLevel.h"
+#include "ModuleSceneLevel8.h"
 #include "ModuleSceneMenu.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
@@ -59,6 +60,17 @@ ModuleSceneLevel::ModuleSceneLevel()
 	bub.PushBack({246, 220, 26, 19 });
 	
 	bub.speed = 0.3f;
+
+	//bub 2
+	bub2.PushBack({ 246, 220, 26, 19 });
+	bub2.PushBack({ 212, 220, 26, 19 });
+	bub2.PushBack({ 178, 220, 28, 19 });
+	bub2.PushBack({ 144, 220, 29, 19 });
+	bub2.PushBack({ 110, 220, 31, 19 });
+	bub2.PushBack({ 76, 220, 31, 19 });
+	bub2.PushBack({ 42, 220, 28, 19 });
+	bub2.PushBack({ 8, 220, 27, 19 });
+	bub2.speed = 0.3f;
 
 	arrowRect = { 15, 514, 22, 55 };
 	//launcher 
@@ -133,15 +145,16 @@ bool ModuleSceneLevel::Start()
 	App->ball_controll->AddBall(4, 0, BLUE);
 	App->ball_controll->AddBall(5, 0, BLUE);
 	App->ball_controll->AddBall(6, 0, GREEN);
-	App->ball_controll->AddBall(7, 0, GREEN);// Bobble level
+	App->ball_controll->AddBall(7, 0, GREEN);// Bobble level 8
+
 	App->ball_controll->AddBall(0, 1, RED);
 	App->ball_controll->AddBall(1, 1, RED);
 	App->ball_controll->AddBall(2, 1, YELLOW);
 	App->ball_controll->AddBall(3, 1, YELLOW);
 	App->ball_controll->AddBall(4, 1, BLUE);
 	App->ball_controll->AddBall(5, 1, BLUE);
-	App->ball_controll->AddBall(6, 1, GREEN);
-	App->ball_controll->AddBall(7, 1, GREEN);
+	App->ball_controll->AddBall(6, 1, GREEN); //7
+	
 	////
 	App->ball_controll->AddBall(0, 2, BLUE);
 	App->ball_controll->AddBall(1, 2, BLUE);
@@ -151,6 +164,7 @@ bool ModuleSceneLevel::Start()
 	App->ball_controll->AddBall(5, 2, RED);
 	App->ball_controll->AddBall(6, 2, YELLOW);
 	App->ball_controll->AddBall(7, 2, YELLOW);// Bobble level
+
 	App->ball_controll->AddBall(0, 3, BLUE);
 	App->ball_controll->AddBall(1, 3, GREEN);
 	App->ball_controll->AddBall(2, 3, GREEN);
@@ -182,6 +196,12 @@ update_status ModuleSceneLevel::Update()
 	
 	// Draw everything --------------------------------------
 	App->render->Blit(graphics, 0, 0, &background);
+
+
+	if (App->input->keyboard[SDL_SCANCODE_L] == KEY_DOWN)
+	{
+		App->fade->FadeToBlack(this, (Module*)App->scene_level8);
+	}
 
 	//wheel
 
@@ -219,7 +239,7 @@ update_status ModuleSceneLevel::Update()
 	}*/
 	if (App->ball_controll->moving_ball->flash==true)
 	{
-		
+		//look this
 	}
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT)
 	{	
@@ -227,7 +247,7 @@ update_status ModuleSceneLevel::Update()
 			launcher.speed = 0.3f;
 			App->render->Blit(graphics_sprite, 130, 192, &(launcher.GetCurrentFrame()), 0.75f); // launcher animation
 
-			App->render->Blit(graphics_sprite, 174, 213, &(bub.GetCurrentFrame()), 0.02f); // Bub animation
+			App->render->Blit(graphics_sprite, 174, 213, &(bub2.GetCurrentFrame()), 0.02f); // Bub animation
 			shoot_angle += 1;
 		}
 	}

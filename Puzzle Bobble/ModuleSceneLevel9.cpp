@@ -3,7 +3,6 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleSceneLevel.h"
-#include "ModuleSceneLevel8.h"
 #include "ModuleSceneLevel9.h"
 #include "ModuleSceneMenu.h"
 #include "ModuleInput.h"
@@ -17,7 +16,7 @@
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
-ModuleSceneLevel8::ModuleSceneLevel8()
+ModuleSceneLevel9::ModuleSceneLevel9()
 {
 	//one_ball = new Ball(316,417,16,BLUE);
 
@@ -61,6 +60,17 @@ ModuleSceneLevel8::ModuleSceneLevel8()
 	bub.PushBack({ 246, 220, 26, 19 });
 
 	bub.speed = 0.3f;
+
+	//bub 2
+	bub2.PushBack({ 246, 220, 26, 19 });
+	bub2.PushBack({ 212, 220, 26, 19 });
+	bub2.PushBack({ 178, 220, 28, 19 });
+	bub2.PushBack({ 144, 220, 29, 19 });
+	bub2.PushBack({ 110, 220, 31, 19 });
+	bub2.PushBack({ 76, 220, 31, 19 });
+	bub2.PushBack({ 42, 220, 28, 19 });
+	bub2.PushBack({ 8, 220, 27, 19 });
+	bub2.speed = 0.3f;
 
 	arrowRect = { 15, 514, 22, 55 };
 	//launcher 
@@ -110,18 +120,18 @@ ModuleSceneLevel8::ModuleSceneLevel8()
 	//	forward = true;
 }
 
-ModuleSceneLevel8::~ModuleSceneLevel8()
+ModuleSceneLevel9::~ModuleSceneLevel9()
 {
 	//delete one_ball;
 }
 
 
 // Load assets
-bool ModuleSceneLevel8::Start()
+bool ModuleSceneLevel9::Start()
 {
 	LOG("Loading lvl scene");
 
-	graphics = App->textures->Load("Sprites and sound/Level7.png");
+	graphics = App->textures->Load("Sprites and sound/Level1.png");
 	graphics_sprite = App->textures->Load("Sprites and sound/spritespuzzle.png");
 
 	App->audio->PlayMusic("Sprites and sound/level_music.ogg", 1.0f);
@@ -129,40 +139,39 @@ bool ModuleSceneLevel8::Start()
 	throw_effect = App->audio->Load_effects("Sprites and sound/throw_effect.wav");
 
 	App->ball_controll->AddBall(0, 0, RED);
-	App->ball_controll->AddBall(1, 0, GREEN);
-	App->ball_controll->AddBall(2, 0, BLUE);
+	App->ball_controll->AddBall(1, 0, RED);
+	App->ball_controll->AddBall(2, 0, YELLOW);
 	App->ball_controll->AddBall(3, 0, YELLOW);
-	App->ball_controll->AddBall(4, 0, PURPLE);
-	App->ball_controll->AddBall(5, 0, GRAY);
-	App->ball_controll->AddBall(6, 0, RED);
-	App->ball_controll->AddBall(7, 0, GREEN);// Bobble level
+	App->ball_controll->AddBall(4, 0, BLUE);
+	App->ball_controll->AddBall(5, 0, BLUE);
+	App->ball_controll->AddBall(6, 0, GREEN);
+	App->ball_controll->AddBall(7, 0, GREEN);// Bobble level 8
 
-	App->ball_controll->AddBall(0, 1,PURPLE);
-	App->ball_controll->AddBall(1, 1, GRAY);
-	App->ball_controll->AddBall(2, 1, RED);
-	App->ball_controll->AddBall(3, 1, GREEN);
+	App->ball_controll->AddBall(0, 1, RED);
+	App->ball_controll->AddBall(1, 1, RED);
+	App->ball_controll->AddBall(2, 1, YELLOW);
+	App->ball_controll->AddBall(3, 1, YELLOW);
 	App->ball_controll->AddBall(4, 1, BLUE);
-	App->ball_controll->AddBall(5, 1, YELLOW);
-	App->ball_controll->AddBall(6, 1, PURPLE);
+	App->ball_controll->AddBall(5, 1, BLUE);
+	App->ball_controll->AddBall(6, 1, GREEN); //7
 
-	//App->ball_controll->AddBall(7, 1, GREEN);
 	////
-	App->ball_controll->AddBall(0, 2, RED);
-	App->ball_controll->AddBall(1, 2, GREEN);
-	App->ball_controll->AddBall(2, 2, BLUE);
-	App->ball_controll->AddBall(3, 2, YELLOW);
-	App->ball_controll->AddBall(4, 2, PURPLE);
-	App->ball_controll->AddBall(5, 2, GRAY);
-	App->ball_controll->AddBall(6, 2, RED);
-	App->ball_controll->AddBall(7, 2, GREEN);// Bobble level
+	App->ball_controll->AddBall(0, 2, BLUE);
+	App->ball_controll->AddBall(1, 2, BLUE);
+	App->ball_controll->AddBall(2, 2, GREEN);
+	App->ball_controll->AddBall(3, 2, GREEN);
+	App->ball_controll->AddBall(4, 2, RED);
+	App->ball_controll->AddBall(5, 2, RED);
+	App->ball_controll->AddBall(6, 2, YELLOW);
+	App->ball_controll->AddBall(7, 2, YELLOW);// Bobble level
 
-	App->ball_controll->AddBall(0, 3, PURPLE);
-	App->ball_controll->AddBall(1, 3, GRAY);
-	App->ball_controll->AddBall(2, 3, RED);
-	App->ball_controll->AddBall(3, 3, GREEN);
-	App->ball_controll->AddBall(4, 3, BLUE);
+	App->ball_controll->AddBall(0, 3, BLUE);
+	App->ball_controll->AddBall(1, 3, GREEN);
+	App->ball_controll->AddBall(2, 3, GREEN);
+	App->ball_controll->AddBall(3, 3, RED);
+	App->ball_controll->AddBall(4, 3, RED);
 	App->ball_controll->AddBall(5, 3, YELLOW);
-	App->ball_controll->AddBall(6, 3, PURPLE);
+	App->ball_controll->AddBall(6, 3, YELLOW);
 
 	App->ball_controll->CreateBall();
 	App->player->Enable();
@@ -171,7 +180,7 @@ bool ModuleSceneLevel8::Start()
 }
 
 // UnLoad assets
-bool ModuleSceneLevel8::CleanUp()
+bool ModuleSceneLevel9::CleanUp()
 {
 
 	LOG("Unloading lvl scene");
@@ -182,16 +191,18 @@ bool ModuleSceneLevel8::CleanUp()
 }
 
 // Update: draw background
-update_status ModuleSceneLevel8::Update()
+update_status ModuleSceneLevel9::Update()
 {
 
 	// Draw everything --------------------------------------
 	App->render->Blit(graphics, 0, 0, &background);
 
-	/*if (App->input->keyboard[SDL_SCANCODE_L] == KEY_DOWN)
+
+	if (App->input->keyboard[SDL_SCANCODE_L] == KEY_DOWN)
 	{
-		App->fade->FadeToBlack(this, (Module*)App->scene_level9);
-	}*/
+		App->fade->FadeToBlack(this, (Module*)App->scene_congrat);
+	}
+
 	//wheel
 
 
@@ -228,7 +239,7 @@ update_status ModuleSceneLevel8::Update()
 	}*/
 	if (App->ball_controll->moving_ball->flash == true)
 	{
-
+		//look this
 	}
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT)
 	{
@@ -236,7 +247,7 @@ update_status ModuleSceneLevel8::Update()
 			launcher.speed = 0.3f;
 			App->render->Blit(graphics_sprite, 130, 192, &(launcher.GetCurrentFrame()), 0.75f); // launcher animation
 
-			App->render->Blit(graphics_sprite, 174, 213, &(bub.GetCurrentFrame()), 0.02f); // Bub animation
+			App->render->Blit(graphics_sprite, 174, 213, &(bub2.GetCurrentFrame()), 0.02f); // Bub animation
 			shoot_angle += 1;
 		}
 	}

@@ -3,7 +3,7 @@
 
 
 
-enum Color { BLUE, RED, GREEN, YELLOW,PURPLE,GRAY };
+enum Color { BLUE, RED, GREEN, YELLOW,PURPLE,GRAY,BLACK,ORANGE };
 
 class Ball
 

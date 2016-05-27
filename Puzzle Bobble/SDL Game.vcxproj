@@ -85,6 +85,7 @@
     <ClInclude Include="ModuleRender.h" />
     <ClInclude Include="ModuleSceneCongrat.h" />
     <ClInclude Include="ModuleSceneLevel8.h" />
+    <ClInclude Include="ModuleSceneLevel9.h" />
     <ClInclude Include="ModuleSceneMenu.h" />
     <ClInclude Include="ModuleSceneLevel.h" />
     <ClInclude Include="ModuleTextures.h" />
@@ -105,6 +106,7 @@
     <ClCompile Include="ModuleRender.cpp" />
     <ClCompile Include="ModuleSceneCongrat.cpp" />
     <ClCompile Include="ModuleSceneLevel8.cpp" />
+    <ClCompile Include="ModuleSceneLevel9.cpp" />
     <ClCompile Include="ModuleSceneMenu.cpp" />
     <ClCompile Include="ModuleSceneLevel.cpp" />
     <ClCompile Include="ModuleTextures.cpp" />
