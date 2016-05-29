@@ -154,7 +154,7 @@ bool ModuleSceneLevel::Start()
 	App->ball_controll->AddBall(4, 1, BLUE);
 	App->ball_controll->AddBall(5, 1, BLUE);
 	App->ball_controll->AddBall(6, 1, GREEN); //7
-	
+
 	////
 	App->ball_controll->AddBall(0, 2, BLUE);
 	App->ball_controll->AddBall(1, 2, BLUE);
@@ -172,6 +172,7 @@ bool ModuleSceneLevel::Start()
 	App->ball_controll->AddBall(4, 3, RED);
 	App->ball_controll->AddBall(5, 3, YELLOW);
 	App->ball_controll->AddBall(6, 3, YELLOW);
+
 
 	App->ball_controll->CreateBall();
 	App->player->Enable();

@@ -188,10 +188,10 @@ update_status ModuleSceneLevel8::Update()
 	// Draw everything --------------------------------------
 	App->render->Blit(graphics, 0, 0, &background);
 
-	/*if (App->input->keyboard[SDL_SCANCODE_L] == KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_L] == KEY_DOWN)
 	{
 		App->fade->FadeToBlack(this, (Module*)App->scene_level9);
-	}*/
+	}
 	//wheel
 
 

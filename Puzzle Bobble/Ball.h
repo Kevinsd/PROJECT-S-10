@@ -16,7 +16,7 @@ public:
 	float y = 0;
 	int rad = 8;
 	float angle = 0;
-	float velocity = 3;
+	float velocity = 6;
 	bool moving = false;
 	bool flash;
 	Color color;
