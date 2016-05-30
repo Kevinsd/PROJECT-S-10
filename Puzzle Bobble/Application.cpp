@@ -45,9 +45,9 @@ bool Application::Init()
 	player->Disable();
 	// Disable the map that you do not start with
 	scene_menu->Disable();
-	scene_level->Disable();
+	//scene_level->Disable();
 	scene_level8->Disable();
-	//scene_level9->Disable();
+	scene_level9->Disable();
 	scene_congrat->Disable();
 	ball_controll->Disable();
 	for(int i = 0; i < NUM_MODULES && ret == true; ++i)

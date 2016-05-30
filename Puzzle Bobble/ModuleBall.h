@@ -31,6 +31,7 @@ public:
 	void AddBall(int tile_x, int tile_y, Color color);
 	bool IsBallConnected(Ball*);
 	void DeleteFlying();
+	bool PushDown();
 	p2Point<int> CheckClosestEmpty(Ball* collided, Ball* toMove);
 
 	p2Point <int> GetTile(int,int);
@@ -39,6 +40,8 @@ public:
 	Ball* recharge_ball = nullptr;
 	Ball* moving_ball = nullptr;
 	Vector<Ball*> array;
+	Vector<Ball*> falling;
+
 	SDL_Texture* graphics_sprite;
 
 	SDL_Rect ballsprite_blue;
@@ -49,6 +52,8 @@ public:
 	SDL_Rect ballsprite_purple;
 	SDL_Rect ballsprite_black;
 	SDL_Rect ballsprite_orange;
+
+	int startingY = 24;
 private:
 
 

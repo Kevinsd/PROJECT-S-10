@@ -8,6 +8,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleSceneCongrat.h"
 #include "ModuleTextures.h"
+#include "ModuleInput.h"
 
 ModuleBall::ModuleBall()
 {
@@ -35,6 +36,8 @@ bool ModuleBall::Init()
 }
 bool ModuleBall::Start()
 {
+	startingY = 24;
+
 	return true;
 }
 
@@ -58,15 +61,70 @@ update_status ModuleBall::Update()
 		else if (array[i]->color == BLACK)
 			App->render->Blit(graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_black);
 		else if (array[i]->color == ORANGE)
-			App->render->Blit(graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_orange);
-		
+			App->render->Blit(graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_orange);	
 	}
+
+	//Debug mode
+	//Push balls down
+	if (App->input->keyboard[SDL_SCANCODE_K] == KEY_DOWN)
+	{
+		if (PushDown() == false)
+		{
+			App->fade->FadeToBlack(App->currentscene, (Module*)App->scene_menu);
+		}
+	}
+	
+	//Change ball color ( <- )
+	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_DOWN)
+	{
+		int colorNum = static_cast<int>(moving_ball->color);
+		colorNum--;
+		if (colorNum < 0)
+			colorNum = 7;
+
+		moving_ball->color = static_cast<Color>(colorNum);
+	}
+
+	//Change ball color ( -> )
+	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_DOWN)
+	{
+		int colorNum = static_cast<int>(moving_ball->color);
+		colorNum++;
+		if (colorNum > 7)
+			colorNum = 0;
+
+		moving_ball->color = static_cast<Color>(colorNum);
+	}
+
+	for (unsigned int i = 0; i < falling.size(); i++)
+	{
+		falling[i]->Move(0);
+
+		if (falling[i]->color == BLUE)
+			App->render->Blit(graphics_sprite, falling[i]->x - 8, falling[i]->y - 8, &ballsprite_blue);
+		else if (falling[i]->color == GRAY)
+			App->render->Blit(graphics_sprite, falling[i]->x - 8, falling[i]->y - 8, &ballsprite_gray);
+		else if (falling[i]->color == RED)
+			App->render->Blit(graphics_sprite, falling[i]->x - 8, falling[i]->y - 8, &ballsprite_red);
+		else if (falling[i]->color == GREEN)
+			App->render->Blit(graphics_sprite, falling[i]->x - 8, falling[i]->y - 8, &ballsprite_green);
+		else if (falling[i]->color == YELLOW)
+			App->render->Blit(graphics_sprite, falling[i]->x - 8, falling[i]->y - 8, &ballsprite_yellow);
+		else if (falling[i]->color == PURPLE)
+			App->render->Blit(graphics_sprite, falling[i]->x - 8, falling[i]->y - 8, &ballsprite_purple);
+		else if (falling[i]->color == BLACK)
+			App->render->Blit(graphics_sprite, falling[i]->x - 8, falling[i]->y - 8, &ballsprite_black);
+		else if (falling[i]->color == ORANGE)
+			App->render->Blit(graphics_sprite, falling[i]->x - 8, falling[i]->y - 8, &ballsprite_orange);
+
+	}
+
 	if (moving_ball != NULL)
 	{
 		if (moving_ball->moving)
 		{
 
-			if (moving_ball->Move() == false)
+			if (moving_ball->Move(startingY) == false)
 			{
 				//iPoint dstTile = GetTile(moving_ball->x, moving_ball->y); look there!
 				iPoint dstTile = CheckClosestEmpty(moving_ball->collidedBall, moving_ball);
@@ -86,6 +144,7 @@ update_status ModuleBall::Update()
 				if (CheckTile(dstTile.x, dstTile.y, true))
 				{
 					delete moving_ball;
+					moving_ball = NULL;
 				}
 
 				else 
@@ -426,16 +485,35 @@ void ModuleBall::DeleteFlying()
 	{
 		if (array[i]->isConnected == false)
 		{
-			array.Pick(i);
+			Ball* tmp = *array.Pick(i);
+			falling.push_back(tmp);
+
+			tmp->Shoot(90);
+			tmp->velocity = -5;
+			//score + 20
 			i--;
 		}
 	}
 }
 
+bool ModuleBall::PushDown()
+{
+	startingY += 16;
+	bool ret = true;
+	//Moving all balls down
+	for (unsigned int i = 0; i < array.size(); i++)
+	{
+		array[i]->y += 16;
+		if (array[i]->y >= 180)
+			ret = false;
+	}
+	return ret;
+}
+
 p2Point <int>  ModuleBall::GetTile(int x, int y)
 {
 	x = x - 96 - 8;
-	y = y - 24 - 8;	
+	y = y - startingY - 8;	
 	int pos_y = 0;
 	int pos_x = 0;
 	pos_y = y  / 16;
@@ -458,7 +536,7 @@ p2Point <int>  ModuleBall::GetTile(int x, int y)
 p2Point <int> ModuleBall::GetPos(int x , int y)
 {
 	p2Point <int> ret;
-	ret.y = y * 16 + 24 + 8;
+	ret.y = y * 16 + startingY + 8;
 	if (y % 2 != 0)
 	{
 		ret.x = x * 16 + 96 + 16;
@@ -542,6 +620,7 @@ void ModuleBall::Check_Pop(Ball* ball)
 			{
 				if (array[j] == checked[i])
 				{
+					//Score + 10
 					array.Pick(j);
 					break;
 				}

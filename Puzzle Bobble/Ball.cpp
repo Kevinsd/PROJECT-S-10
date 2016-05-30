@@ -21,7 +21,7 @@ void Ball::Shoot(float shoot_ang)
 	moving = true;
 }
 
-bool Ball::Move()
+bool Ball::Move(int top)
 {
 	float vel_x = 0;
 	float vel_y = 0;
@@ -56,11 +56,11 @@ bool Ball::Move()
 		}
 
 
-		if (y-rad <= 24 )
+		if (y-rad <= top )
 
 		{
 			moving = false;
-			y = 24 + rad;
+			y = top + rad;
 			bool flash = true;
 			return false;
 		}

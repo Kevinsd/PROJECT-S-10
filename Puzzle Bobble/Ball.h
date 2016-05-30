@@ -26,7 +26,7 @@ public:
 	Ball();
 	Ball(float x, float y, int rad, Color color);
 	void Shoot(float);
-	bool Move();
+	bool Move(int);
 
 
 	~Ball();
