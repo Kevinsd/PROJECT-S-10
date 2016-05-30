@@ -18,6 +18,7 @@ public:
 	update_status Update();
 	bool CleanUp();
 
+
 public:
 
 	int shoot_angle = 90;
@@ -45,7 +46,7 @@ public:
 	//  Throw sound
 	Mix_Chunk* throw_effect = nullptr;
 
-
+	
 	float foreground_pos;
 	bool forward;
 };

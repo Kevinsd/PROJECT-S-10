@@ -31,6 +31,7 @@ ModuleSceneCongrat::~ModuleSceneCongrat()
 // Load assets
 bool ModuleSceneCongrat::Start()
 {
+	App->currentscene = this;
 	LOG("Loading lvl scene");
 
 	graphics = App->textures->Load("Sprites and sound/Congrats.png");

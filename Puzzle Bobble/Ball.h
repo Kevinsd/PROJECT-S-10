@@ -19,6 +19,7 @@ public:
 	float velocity = 6;
 	bool moving = false;
 	bool flash;
+	bool isConnected = false;
 	Color color;
 	Ball* collidedBall;
 

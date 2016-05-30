@@ -38,6 +38,7 @@ public:
 	ModuleAudio* audio;
 	ModuleBall* ball_controll;
 	ModuleSceneCongrat* scene_congrat;
+	Module* currentscene;
 
 public:
 

@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include "ModuleFadeToBlack.h"
 #include "ModuleSceneCongrat.h"
+#include "ModuleTextures.h"
 
 ModuleBall::ModuleBall()
 {
@@ -29,12 +30,11 @@ bool ModuleBall::Init()
 	ballsprite_black = { 338, 286, 16, 16 };
 	ballsprite_orange = { 338, 312, 16, 16 };
 
-
+	graphics_sprite = App->textures->Load("Sprites and sound/spritespuzzle.png");
 	return true;
 }
 bool ModuleBall::Start()
 {
-
 	return true;
 }
 
@@ -44,21 +44,21 @@ update_status ModuleBall::Update()
 	for (unsigned int i = 0; i < array.size(); i++)
 	{
 		if (array[i]->color == BLUE)
-		App->render->Blit(App->scene_level->graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_blue);
+		App->render->Blit(graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_blue);
 		else if (array[i]->color == GRAY)
-		App->render->Blit(App->scene_level->graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_gray);
+		App->render->Blit(graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_gray);
 		else if (array[i]->color == RED)
-		App->render->Blit(App->scene_level->graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_red);
+		App->render->Blit(graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_red);
 		else if (array[i]->color == GREEN)
-		App->render->Blit(App->scene_level->graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_green);
+		App->render->Blit(graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_green);
 		else if (array[i]->color == YELLOW)
-		App->render->Blit(App->scene_level->graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_yellow);
+		App->render->Blit(graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_yellow);
 		else if (array[i]->color == PURPLE)
-		App->render->Blit(App->scene_level->graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_purple);
+		App->render->Blit(graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_purple);
 		else if (array[i]->color == BLACK)
-			App->render->Blit(App->scene_level->graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_black);
+			App->render->Blit(graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_black);
 		else if (array[i]->color == ORANGE)
-			App->render->Blit(App->scene_level->graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_orange);
+			App->render->Blit(graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_orange);
 		
 	}
 	if (moving_ball != NULL)
@@ -78,12 +78,12 @@ update_status ModuleBall::Update()
 				if (moving_ball->y >= 180) // lOSE CONDITION
 				{
 					moving_ball = NULL;
-					App->fade->FadeToBlack(App->scene_level, (Module*)App->scene_menu);
+					App->fade->FadeToBlack(App->currentscene, (Module*)App->scene_menu);
 					return UPDATE_CONTINUE;
 				}
 				  
 				//TMP FIX
-				if (CheckTile(dstTile.x, dstTile.y))
+				if (CheckTile(dstTile.x, dstTile.y, true))
 				{
 					delete moving_ball;
 				}
@@ -98,42 +98,47 @@ update_status ModuleBall::Update()
 						moving_ball = NULL;
 				}
 				CreateBall();
-				if (array.size() == 0)
-				{
-					App->fade->FadeToBlack((Module*)App->scene_level, App->scene_congrat);
-				}
+				
 			}
 		}
 		if (moving_ball != NULL)
 		{
 			if (moving_ball->color == BLUE)
-				App->render->Blit(App->scene_level->graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_blue);		
+				App->render->Blit(graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_blue);		
 			if (moving_ball->color == GRAY)
-				App->render->Blit(App->scene_level->graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_gray);
+				App->render->Blit(graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_gray);
 			if (moving_ball->color == RED)
-				App->render->Blit(App->scene_level->graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_red);
+				App->render->Blit(graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_red);
 			if (moving_ball->color == GREEN)
-				App->render->Blit(App->scene_level->graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_green);
+				App->render->Blit(graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_green);
 			if (moving_ball->color == YELLOW)
-				App->render->Blit(App->scene_level->graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_yellow);
+				App->render->Blit(graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_yellow);
 			if (moving_ball->color == PURPLE)
-				App->render->Blit(App->scene_level->graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_purple);
+				App->render->Blit(graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_purple);
+			if (moving_ball->color == BLACK)
+				App->render->Blit(graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_black);
+			if (moving_ball->color == ORANGE)
+				App->render->Blit(graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_orange);
 		}
 	}
 	if (recharge_ball != NULL)
 	{
 		if (recharge_ball->color == BLUE)
-			App->render->Blit(App->scene_level->graphics_sprite, recharge_ball->x - 8, recharge_ball->y - 8, &ballsprite_blue);
+			App->render->Blit(graphics_sprite, recharge_ball->x - 8, recharge_ball->y - 8, &ballsprite_blue);
 		if (recharge_ball->color == GRAY)
-			App->render->Blit(App->scene_level->graphics_sprite, recharge_ball->x - 8, recharge_ball->y - 8, &ballsprite_gray);
+			App->render->Blit(graphics_sprite, recharge_ball->x - 8, recharge_ball->y - 8, &ballsprite_gray);
 		if (recharge_ball->color == RED)
-			App->render->Blit(App->scene_level->graphics_sprite, recharge_ball->x - 8, recharge_ball->y - 8, &ballsprite_red);
+			App->render->Blit(graphics_sprite, recharge_ball->x - 8, recharge_ball->y - 8, &ballsprite_red);
 		if (recharge_ball->color == GREEN)
-			App->render->Blit(App->scene_level->graphics_sprite, recharge_ball->x - 8, recharge_ball->y - 8, &ballsprite_green);
+			App->render->Blit(graphics_sprite, recharge_ball->x - 8, recharge_ball->y - 8, &ballsprite_green);
 		if (recharge_ball->color == YELLOW)
-			App->render->Blit(App->scene_level->graphics_sprite, recharge_ball->x - 8, recharge_ball->y - 8, &ballsprite_yellow);
+			App->render->Blit(graphics_sprite, recharge_ball->x - 8, recharge_ball->y - 8, &ballsprite_yellow);
 		if (recharge_ball->color == PURPLE)
-			App->render->Blit(App->scene_level->graphics_sprite, recharge_ball->x - 8, recharge_ball->y - 8, &ballsprite_purple);
+			App->render->Blit(graphics_sprite, recharge_ball->x - 8, recharge_ball->y - 8, &ballsprite_purple);
+		if (recharge_ball->color == BLACK)
+			App->render->Blit(graphics_sprite, recharge_ball->x - 8, recharge_ball->y - 8, &ballsprite_black);
+		if (recharge_ball->color == ORANGE)
+			App->render->Blit(graphics_sprite, recharge_ball->x - 8, recharge_ball->y - 8, &ballsprite_orange);
 
 	}
 	return UPDATE_CONTINUE;
@@ -213,7 +218,7 @@ void ModuleBall::CreateBall()
 void ModuleBall::AddBall(int tile_x, int tile_y, Color color)
 {
 	iPoint pos = GetPos(tile_x, tile_y);
-	if (!CheckTile(tile_x, tile_y))
+	if (!CheckTile(tile_x, tile_y, true))
 	{
 		Ball* newBall = new Ball(pos.x, pos.y, 8, color);
 		array.push_back(newBall);
@@ -228,7 +233,7 @@ p2Point<int> ModuleBall::CheckClosestEmpty(Ball* collided, Ball* toMove)
 	{
 		iPoint colTile = GetTile(collided->x, collided->y);
 		int lowerDst = 5000;
-		if (!CheckTile(colTile.x + 1, colTile.y))
+		if (!CheckTile(colTile.x + 1, colTile.y, true))
 		{
 			iPoint pos = GetPos(colTile.x + 1, colTile.y);
 			float dstX = pos.x - toMove->x;
@@ -237,7 +242,7 @@ p2Point<int> ModuleBall::CheckClosestEmpty(Ball* collided, Ball* toMove)
 			ret = { colTile.x + 1, colTile.y };
 		}
 
-		if (!CheckTile(colTile.x - 1, colTile.y))
+		if (!CheckTile(colTile.x - 1, colTile.y, true))
 		{
 			iPoint pos = GetPos(colTile.x - 1, colTile.y);
 			float dstX = pos.x - toMove->x;
@@ -249,7 +254,7 @@ p2Point<int> ModuleBall::CheckClosestEmpty(Ball* collided, Ball* toMove)
 			}
 		}
 
-		if (!CheckTile(colTile.x, colTile.y - 1))
+		if (!CheckTile(colTile.x, colTile.y - 1, true))
 		{
 			iPoint pos = GetPos(colTile.x, colTile.y - 1);
 			float dstX = pos.x - toMove->x;
@@ -261,7 +266,7 @@ p2Point<int> ModuleBall::CheckClosestEmpty(Ball* collided, Ball* toMove)
 			}
 		}
 
-		if (!CheckTile(colTile.x, colTile.y + 1))
+		if (!CheckTile(colTile.x, colTile.y + 1, true))
 		{
 			iPoint pos = GetPos(colTile.x, colTile.y + 1);
 			float dstX = pos.x - toMove->x;
@@ -275,7 +280,7 @@ p2Point<int> ModuleBall::CheckClosestEmpty(Ball* collided, Ball* toMove)
 
 		if (colTile.y % 2 != 0)
 		{
-			if (!CheckTile(colTile.x + 1, colTile.y + 1))
+			if (!CheckTile(colTile.x + 1, colTile.y + 1, true))
 			{
 				iPoint pos = GetPos(colTile.x + 1, colTile.y + 1);
 				float dstX = pos.x - toMove->x;
@@ -286,7 +291,7 @@ p2Point<int> ModuleBall::CheckClosestEmpty(Ball* collided, Ball* toMove)
 					ret = { colTile.x + 1, colTile.y + 1 };
 				}
 			}
-			if (!CheckTile(colTile.x + 1, colTile.y - 1))
+			if (!CheckTile(colTile.x + 1, colTile.y - 1, true))
 			{
 				iPoint pos = GetPos(colTile.x + 1, colTile.y - 1);
 				float dstX = pos.x - toMove->x;
@@ -300,7 +305,7 @@ p2Point<int> ModuleBall::CheckClosestEmpty(Ball* collided, Ball* toMove)
 		}
 		else
 		{
-			if (!CheckTile(colTile.x - 1, colTile.y + 1))
+			if (!CheckTile(colTile.x - 1, colTile.y + 1, true))
 			{
 				iPoint pos = GetPos(colTile.x - 1, colTile.y + 1);
 				float dstX = pos.x - toMove->x;
@@ -311,7 +316,7 @@ p2Point<int> ModuleBall::CheckClosestEmpty(Ball* collided, Ball* toMove)
 					ret = { colTile.x - 1, colTile.y + 1 };
 				}
 			}
-			if (!CheckTile(colTile.x - 1, colTile.y - 1))
+			if (!CheckTile(colTile.x - 1, colTile.y - 1, true))
 			{
 				iPoint pos = GetPos(colTile.x - 1, colTile.y - 1);
 				float dstX = pos.x - toMove->x;
@@ -332,29 +337,97 @@ p2Point<int> ModuleBall::CheckClosestEmpty(Ball* collided, Ball* toMove)
 	return ret;
 }
 
+bool ModuleBall::IsBallConnected(Ball* ball)
+{
+	iPoint tile = GetTile(ball->x, ball->y);
+	bool upLleft = false, upRight = false, left = false, right = false;
+	Ball* checking = NULL;
+
+	if (tile.y == 0)
+	{
+		return true;
+	}
+
+	if (tile.y % 2 != 0)
+	{
+		//Upper left ball
+		checking = GetBallFromTile(tile.x, tile.y - 1);
+		if (checking && checking->isConnected)
+		{
+			return true;
+		}
+		//Upper right ball
+		checking = GetBallFromTile(tile.x + 1, tile.y - 1);
+		if (checking && checking->isConnected)
+		{
+			return true;
+		}
+	}
+	else
+	{
+		//Upper left ball
+		checking = GetBallFromTile(tile.x, tile.y - 1);
+		if (checking && checking->isConnected)
+		{
+			return true;
+		}
+		//Upper right ball
+		checking = GetBallFromTile(tile.x - 1, tile.y - 1);
+		if (checking && checking->isConnected)
+		{
+			return true;
+		}
+	}
+	//Right ball
+	checking = GetBallFromTile(tile.x + 1, tile.y);
+	if (checking && checking->isConnected)
+	{
+		return true;
+	}
+
+	//Left ball
+	checking = GetBallFromTile(tile.x - 1, tile.y);
+	if (checking && checking->isConnected)
+	{
+		return true;
+	}
+	return false;
+}
+
 void ModuleBall::DeleteFlying()
 {
+	//Setting all connected to 0
 	for (uint i = 0; i < array.size(); i++)
 	{
-		if (array[i]->y != 24 + 8)
+		array[i]->isConnected = false;
+	}
+
+	//Getting al conected balls
+	bool connectedChange = true;
+	while (connectedChange)
+	{
+		connectedChange = false;
+
+		for (uint i = 0; i < array.size(); i++)
 		{
-			iPoint tile = GetTile(array[i]->x, array[i]->y);
-			if (tile.y % 2 != 0)
+			if (array[i]->isConnected == false)
 			{
-				if (!CheckTile(tile.x, tile.y - 1) && !CheckTile(tile.x + 1, tile.y - 1))
+				if (IsBallConnected(array[i]) == true)
 				{
-					array.Pick(i);
-					i--;
+					array[i]->isConnected = true;
+					connectedChange = true;
 				}
 			}
-			else
-			{
-				if (!CheckTile(tile.x, tile.y - 1) && !CheckTile(tile.x - 1, tile.y - 1))
-				{
-					array.Pick(i);
-					i--;
-				}
-			}
+		}
+	}
+
+	//Deleting all non-connected balls
+	for (uint i = 0; i < array.size(); i++)
+	{
+		if (array[i]->isConnected == false)
+		{
+			array.Pick(i);
+			i--;
 		}
 	}
 }
@@ -397,14 +470,14 @@ p2Point <int> ModuleBall::GetPos(int x , int y)
 	return ret;
 }
 
-bool ModuleBall::CheckTile(int x, int y)
+bool ModuleBall::CheckTile(int x, int y, bool default)
 {
 	if (x < 0)
-		return true;
+		return default;
 	if (x > 7 && y % 2 == 0)
-		return true;
+		return default;
 	if (x > 6 && y % 2 != 0)
-		return true;
+		return default;
 	p2Point <int> pos = GetPos(x, y);
 
 	for (unsigned int i = 0; i < array.size(); i++)

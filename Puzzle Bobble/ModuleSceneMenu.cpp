@@ -34,6 +34,7 @@ ModuleSceneMenu::~ModuleSceneMenu()
 // Load assets
 bool ModuleSceneMenu::Start()
 {
+	App->currentscene = this;
 	LOG("Loading background assets");
 	bool ret = true;
 	graphics = App->textures->Load("Sprites and sound/Menu2.png");

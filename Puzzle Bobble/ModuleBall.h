@@ -21,7 +21,7 @@ public:
 	update_status Update ();
 	bool CleanUp();
 	Ball* Collision();
-	bool CheckTile(int,int);
+	bool CheckTile(int,int, bool);
 	void Check_Pop(Ball* ball);
 	void CheckSoroundings(Ball*, Vector<Ball*>&, Vector<Ball*>&);
 	Ball* GetBallFromTile(int x, int y);
@@ -29,6 +29,7 @@ public:
 	void ShootBall(float);
 	void CreateBall();
 	void AddBall(int tile_x, int tile_y, Color color);
+	bool IsBallConnected(Ball*);
 	void DeleteFlying();
 	p2Point<int> CheckClosestEmpty(Ball* collided, Ball* toMove);
 
@@ -38,6 +39,8 @@ public:
 	Ball* recharge_ball = nullptr;
 	Ball* moving_ball = nullptr;
 	Vector<Ball*> array;
+	SDL_Texture* graphics_sprite;
+
 	SDL_Rect ballsprite_blue;
 	SDL_Rect ballsprite_green;
 	SDL_Rect ballsprite_yellow;

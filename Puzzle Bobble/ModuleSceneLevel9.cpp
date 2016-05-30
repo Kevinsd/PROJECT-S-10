@@ -129,7 +129,11 @@ ModuleSceneLevel9::~ModuleSceneLevel9()
 // Load assets
 bool ModuleSceneLevel9::Start()
 {
+	App->currentscene = this;
 	LOG("Loading lvl scene");
+
+	App->player->Enable();
+	App->ball_controll->Enable();
 
 	graphics = App->textures->Load("Sprites and sound/Level7.png");
 	graphics_sprite = App->textures->Load("Sprites and sound/spritespuzzle.png");
@@ -185,11 +189,8 @@ bool ModuleSceneLevel9::Start()
 	App->ball_controll->AddBall(3, 7, YELLOW);
 	App->ball_controll->AddBall(4, 7, GREEN);
 
-	
-
 	App->ball_controll->CreateBall();
-	App->player->Enable();
-	App->ball_controll->Enable();
+
 	return true;
 }
 
@@ -212,7 +213,7 @@ update_status ModuleSceneLevel9::Update()
 	App->render->Blit(graphics, 0, 0, &background);
 
 
-	if (App->input->keyboard[SDL_SCANCODE_L] == KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_L] == KEY_DOWN || App->ball_controll->array.size() == 0)
 	{
 		App->fade->FadeToBlack(this, (Module*)App->scene_congrat);
 	}

@@ -18,6 +18,7 @@
 
 ModuleSceneLevel::ModuleSceneLevel()
 {
+
 	//one_ball = new Ball(316,417,16,BLUE);
 
 	//Balls
@@ -129,8 +130,12 @@ ModuleSceneLevel::~ModuleSceneLevel()
 // Load assets
 bool ModuleSceneLevel::Start()
 {
+	App->currentscene = this;
 	LOG("Loading lvl scene");
-	
+
+	App->player->Enable();
+	App->ball_controll->Enable();
+
 	graphics = App->textures->Load("Sprites and sound/Level1.png");
 	graphics_sprite = App->textures->Load("Sprites and sound/spritespuzzle.png");
 
@@ -175,19 +180,18 @@ bool ModuleSceneLevel::Start()
 
 
 	App->ball_controll->CreateBall();
-	App->player->Enable();
-	App->ball_controll->Enable();
+
 	return true;
 }
 
 // UnLoad assets
 bool ModuleSceneLevel::CleanUp()
 {
-
 	LOG("Unloading lvl scene");
 	App->player->Disable();
 	if (App->ball_controll->IsEnabled())
 		App->ball_controll->Disable();
+
 	return true;
 }
 
@@ -199,7 +203,7 @@ update_status ModuleSceneLevel::Update()
 	App->render->Blit(graphics, 0, 0, &background);
 
 
-	if (App->input->keyboard[SDL_SCANCODE_L] == KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_L] == KEY_DOWN || App->ball_controll->array.size()==0)
 	{
 		App->fade->FadeToBlack(this, (Module*)App->scene_level8);
 	}
@@ -285,4 +289,5 @@ update_status ModuleSceneLevel::Update()
 	App->render->Blit(graphics_sprite, 86, 209, &bag, 0.75f); // Bag 
 	App->render->Blit(graphics, 179, 213, &wheel);
 	return UPDATE_CONTINUE;
+
 }
