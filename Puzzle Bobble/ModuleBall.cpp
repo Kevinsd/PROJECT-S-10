@@ -44,6 +44,18 @@ bool ModuleBall::Start()
 
 update_status ModuleBall::Update()
 {
+	if (debug == true)
+	{
+		SDL_Rect left = { 0, 0, 96, SCREEN_HEIGHT };
+		App->render->DrawQuad(left, 255, 0, 0, 100, true);
+
+		SDL_Rect right = { 224, 0, SCREEN_WIDTH - 224, SCREEN_HEIGHT};
+		App->render->DrawQuad(right, 255, 0, 0, 100, true);
+
+		SDL_Rect up = { 96, 0, (SCREEN_WIDTH - 96 - (SCREEN_WIDTH - 224)), startingY };
+		App->render->DrawQuad(up, 255, 0, 0, 100, true);
+	}
+
 	for (unsigned int i = 0; i < array.size(); i++)
 	{
 		if (array[i]->color == BLUE)
@@ -61,8 +73,15 @@ update_status ModuleBall::Update()
 		else if (array[i]->color == BLACK)
 			App->render->Blit(graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_black);
 		else if (array[i]->color == ORANGE)
-			App->render->Blit(graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_orange);	
+			App->render->Blit(graphics_sprite, array[i]->x - 8, array[i]->y - 8, &ballsprite_orange);
+
+		if (debug == true)
+		{
+			App->render->DrawCircle(array[i]->x, array[i]->y, array[i]->rad, 255, 0, 0, 255);
+		}
+
 	}
+
 
 	//Debug mode
 	//Push balls down
@@ -73,7 +92,12 @@ update_status ModuleBall::Update()
 			App->fade->FadeToBlack(App->currentscene, (Module*)App->scene_menu);
 		}
 	}
-	
+
+	if (App->input->keyboard[SDL_SCANCODE_F1] == KEY_DOWN)
+	{
+		debug = !debug;
+	}
+
 	//Change ball color ( <- )
 	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_DOWN)
 	{
@@ -123,9 +147,17 @@ update_status ModuleBall::Update()
 	{
 		if (moving_ball->moving)
 		{
-
 			if (moving_ball->Move(startingY) == false)
 			{
+				if (shotsNum == 9)
+				{
+					shotsNum = 0;
+					if (PushDown() == false)
+					{
+						App->fade->FadeToBlack(App->currentscene, (Module*)App->scene_menu);
+					}
+				}
+
 				//iPoint dstTile = GetTile(moving_ball->x, moving_ball->y); look there!
 				iPoint dstTile = CheckClosestEmpty(moving_ball->collidedBall, moving_ball);
 				p2Point <int> get_pos = GetPos(dstTile.x, dstTile.y);
@@ -159,11 +191,12 @@ update_status ModuleBall::Update()
 				CreateBall();
 				
 			}
+
 		}
 		if (moving_ball != NULL)
 		{
 			if (moving_ball->color == BLUE)
-				App->render->Blit(graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_blue);		
+				App->render->Blit(graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_blue);
 			if (moving_ball->color == GRAY)
 				App->render->Blit(graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_gray);
 			if (moving_ball->color == RED)
@@ -178,6 +211,12 @@ update_status ModuleBall::Update()
 				App->render->Blit(graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_black);
 			if (moving_ball->color == ORANGE)
 				App->render->Blit(graphics_sprite, moving_ball->x - 8, moving_ball->y - 8, &ballsprite_orange);
+
+			if (debug == true)
+			{
+				App->render->DrawCircle(moving_ball->x, moving_ball->y, moving_ball->rad, 255, 0, 0, 255);
+			}
+
 		}
 	}
 	if (recharge_ball != NULL)
@@ -221,6 +260,7 @@ void ModuleBall::ShootBall(float shoot)
 {
 	if (moving_ball != NULL)
 	{
+		shotsNum++;
 		moving_ball->Shoot(shoot);
 	}
 

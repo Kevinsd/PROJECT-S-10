@@ -3,6 +3,8 @@
 #include "ModuleRender.h"
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
+#include <math.h>
+
 #include "SDL/include/SDL.h"
 
 ModuleRender::ModuleRender() : Module()
@@ -112,3 +114,59 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section, f
 	return ret;
 }
 
+bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool filled) const
+{
+	bool ret = true;
+
+	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+	SDL_SetRenderDrawColor(renderer, r, g, b, a);
+
+	SDL_Rect rec(rect);
+	rec.x = (int)(rect.x * SCREEN_SIZE);
+	rec.y = (int)(rect.y * SCREEN_SIZE);
+	rec.w *= SCREEN_SIZE;
+	rec.h *= SCREEN_SIZE;
+
+	int result = (filled) ? SDL_RenderFillRect(renderer, &rec) : SDL_RenderDrawRect(renderer, &rec);
+
+	if (result != 0)
+	{
+		LOG("Cannot draw quad to screen. SDL_RenderFillRect error: %s", SDL_GetError());
+		ret = false;
+	}
+
+	return ret;
+}
+
+bool ModuleRender::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uint8 a) const
+{
+	bool ret = true;
+	
+	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+	SDL_SetRenderDrawColor(renderer, r, g, b, a);
+
+	int result = -1;
+	SDL_Point points[360];
+
+	float factor = (float)M_PI / 180.0f;
+
+	x *= SCREEN_SIZE;
+	y *= SCREEN_SIZE;
+
+	for (uint i = 0; i < 360; ++i)
+	{
+		points[i].x = (int)((x)+radius * cos(i * factor) * SCREEN_SIZE);
+		points[i].y = (int)((y)+radius * sin(i * factor) * SCREEN_SIZE);
+	}
+
+
+	result = SDL_RenderDrawPoints(renderer, points, 360);
+
+	if (result != 0)
+	{
+		LOG("Cannot draw quad to screen. SDL_RenderFillRect error: %s", SDL_GetError());
+		ret = false;
+	}
+
+	return ret;
+}
