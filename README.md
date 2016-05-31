@@ -5,21 +5,22 @@ Puzzle Bubble it's a very amazing project created by UPC students. This game is 
 ## Usage
 
 To play this game we will use the controls A and D keys to change the direction of the arrow, which indicates the direction of the ball. To shoot the ball, we use the space bar located in the bottom of the keyboard.
-A--->Left direction
 
-D--->Right direction
+-A--->Left direction
 
-Space Bar--->Shot the ball
+-D--->Right direction
 
-Right arrow--->Next ball
+-Space Bar--->Shot the ball
 
-Left arrow--->Previous ball
+-Right arrow--->Next ball
 
-F1--->Active coliders
+-Left arrow--->Previous ball
 
-0--->Lose condition
+-F1--->Active coliders
 
-L--->Next level
+-0--->Lose condition
+
+-L--->Next level
 
 
 
