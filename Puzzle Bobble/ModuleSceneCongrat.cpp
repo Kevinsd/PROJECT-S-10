@@ -34,7 +34,7 @@ bool ModuleSceneCongrat::Start()
 	App->currentscene = this;
 	LOG("Loading lvl scene");
 
-	graphics = App->textures->Load("Sprites and sound/Congrats.png");
+	graphics = App->textures->Load("Sprites and sound/Congrats2.png");
 	graphics_sprite = App->textures->Load("Sprites and sound/spritespuzzle.png");
 
 //	App->audio->PlayMusic("Sprites and sound/level_music.ogg", 1.0f);
