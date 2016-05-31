@@ -14,12 +14,16 @@ About the game's versions, we have to say that there were two different versions
 
 The second version of the game was published six months after the first one, in December of 1994. This second version was the international version for Neo-Geo MVS, which was a 16-bit system manufactured by the Japanese SNK company in 1990. This latest version was very similar to the first one, with the difference that this one had stereo sound, some different sound effects and translated texts depending on where it sales.
 
-Puzzle Bobble has a big connection with Bubble Bobble, that connection made the creators use the same ìmain charactersî of the game, those two dinosaurs (Bob and Bub) and the same enemies. These enemies are trapped in the colored bubbles that explode when there are three or more bubbles of the same color.
+Puzzle Bobble has a big connection with Bubble Bobble, that connection made the creators use the same ‚Äúmain characters‚Äù of the game, those two dinosaurs (Bob and Bub) and the same enemies. These enemies are trapped in the colored bubbles that explode when there are three or more bubbles of the same color.
 
 ##Credits
 
-JosÈ RodrÌguez
-Sergi S·nchez Manzano
-Kevin S·nchez DÌaz
+Jos√© Rodr√≠guez
+
+Sergi S√°nchez Manzano
+
+Kevin S√°nchez D√≠az
+
 Joel Panicello Nieto
+
 Manav Lakhwani
