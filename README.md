@@ -1,4 +1,4 @@
-# PUZZLE BOBBLE
+﻿# PUZZLE BOBBLE
 
 Puzzle Bubble it's a very amazing project created by UPC students. This game is puzzle type although in its principles was published as an arcade title. The game consists of eliminate the balls of the map that appear (which have different enemies inside depending on the color) before they reach the position that is our shuttle.
 
@@ -35,28 +35,28 @@ Puzzle Bobble has a big connection with Bubble Bobble, that connection made the 
 
 ##Credits
 
-José Rodríguez
+José Rodríguez -> Code manager
 
 
 
 
 
-Sergi Sánchez Manzano
+Sergi Sánchez Manzano -> Code 
 
 
 
 
 
-Kevin Sánchez Díaz
+Kevin Sánchez Díaz -> Management Leader
 
 
 
 
 
-Joel Panicello Nieto
+Joel Panicello Nieto -> Artist
 
 
 
 
 
-Manav Lakhwani
+Manav Lakhwani -> QA 
