@@ -311,6 +311,7 @@ bool ModuleBall::CleanUp()
 {
 	for (unsigned int i = 0; i< array.size(); i++)
 	{
+		if (array[i]!=0)
 		delete array[i];
 
 	}
@@ -595,11 +596,12 @@ void ModuleBall::DeleteFlying()
 			tmp->Shoot(90);
 			tmp->velocity = -7;
 			//score + 20
-		/*if (tmp->y >= (SCREEN_HEIGHT + tmp->rad))
+		if (tmp->y >= (SCREEN_HEIGHT + tmp->rad))
 			{
+			if (falling[i]!= 0)
 				delete falling[i];
 				
-			}*/
+			}
 	//	if (tmp->y >= (SCREEN_HEIGHT + tmp->rad)
 			i--;
 				
