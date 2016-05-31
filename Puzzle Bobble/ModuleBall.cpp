@@ -182,6 +182,7 @@ update_status ModuleBall::Update()
 
 	for (unsigned int i = 0; i < falling.size(); i++)
 	{
+		if (falling[i] != NULL)
 		falling[i]->Move(0);
 		/*if (falling[i]->collidedBall)
 		{
@@ -596,12 +597,16 @@ void ModuleBall::DeleteFlying()
 			tmp->Shoot(90);
 			tmp->velocity = -7;
 			//score + 20
-		if (tmp->y >= (SCREEN_HEIGHT + tmp->rad))
+			if (falling[i] != 0)
 			{
-			if (falling[i]!= 0)
-				delete falling[i];
+				if (tmp->y >= (SCREEN_HEIGHT + tmp->rad))
+						{
+			
+							delete falling[i];
 				
+						}
 			}
+		
 	//	if (tmp->y >= (SCREEN_HEIGHT + tmp->rad)
 			i--;
 				
