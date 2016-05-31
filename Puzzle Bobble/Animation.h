@@ -9,9 +9,9 @@ class Animation
 public:
 	float speed = 1.0f;
 	SDL_Rect frames[MAX_FRAMES];
-
-private:
 	float current_frame;
+private:
+	
 	int last_frame = 0;
 
 public:

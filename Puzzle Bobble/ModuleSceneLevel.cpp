@@ -50,6 +50,15 @@ ModuleSceneLevel::ModuleSceneLevel()
 	
 	bub_static.speed = 0.039f;
 
+	//left bub
+
+	left_bub.PushBack({ 16, 17, 17, 19 });
+	left_bub.PushBack({ 254, 19, 17, 17 });
+	left_bub.PushBack({ 288, 18, 22, 18 });
+	left_bub.PushBack({ 322, 18, 22, 18 });
+
+	left_bub.speed = 0;
+
 	// bub animation
 	bub.PushBack({8, 220, 27, 19});
 	bub.PushBack({42, 220, 28, 19});
@@ -293,6 +302,8 @@ update_status ModuleSceneLevel::Update()
 		{
 			if (App->ball_controll->moving_ball->moving == false)
 			{
+				left_bub.speed = 0.2f;
+				
 				App->ball_controll->ShootBall(shoot_angle);
 			pipe.speed = 0.02f;
 			App->render->Blit(graphics_sprite, 154, 215, &(pipe.GetCurrentFrame()), 0.75f);
@@ -301,10 +312,15 @@ update_status ModuleSceneLevel::Update()
 		}
 		Mix_PlayChannel(-1, throw_effect, 0);
 	}
+	App->render->Blit(graphics_sprite, 136, 213, &(left_bub.GetCurrentFrame()), 0.75f);
 	
 	App->render->Blit(graphics_sprite, 151, 180, &arrowRect, 1.0f, 90-shoot_angle);
 	App->render->Blit(graphics_sprite, 86, 209, &bag, 0.75f); // Bag 
 	App->render->Blit(graphics, 179, 213, &wheel);
+	if (left_bub.current_frame == 0)
+	{
+		left_bub.speed = 0;
+	}
 	return UPDATE_CONTINUE;
 
 }

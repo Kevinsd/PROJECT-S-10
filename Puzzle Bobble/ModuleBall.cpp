@@ -22,16 +22,28 @@ ModuleBall::~ModuleBall()
 // Called before render is available
 bool ModuleBall::Init()
 {
-	ballsprite_blue = { 12, 260, 16, 16 };
-	ballsprite_gray = { 12, 286, 16, 16 };
+	ballsprite_blue = { 32, 260, 16, 16 };
+	ballsprite_gray = { 32, 286, 16, 16 };
 	ballsprite_red = { 12, 312, 16, 16 };
-	ballsprite_yellow = { 12, 338, 16, 16 };
+	ballsprite_yellow = { 32, 338, 16, 16 };
 	ballsprite_purple = { 338, 338, 16, 16 };
 	ballsprite_green = { 338, 260, 16, 16 };
 	ballsprite_black = { 338, 286, 16, 16 };
 	ballsprite_orange = { 338, 312, 16, 16 };
 
+	top =  { 119, 134, 129, 15 };
+	top1 = { 119, 201, 129, 30 };
+	top2 = { 119, 282, 129, 46 };
+	top3 = { 119, 377, 129, 62 };
+	top4 = { 119, 486, 129, 78 };
+	top5 = { 119, 609, 129, 94 };
+	top6 = { 119, 746, 129, 110 };
+	top7 = { 119, 897, 129, 126 };
+	top8 = { 119, 1062, 129, 141 };
+	top9 = { 119, 1434, 129, 157 };
+
 	graphics_sprite = App->textures->Load("Sprites and sound/spritespuzzle.png");
+	graphics_top = App->textures->Load("Sprites and sound/roof_sprites_def.png");
 	return true;
 }
 bool ModuleBall::Start()
@@ -54,6 +66,47 @@ update_status ModuleBall::Update()
 
 		SDL_Rect up = { 96, 0, (SCREEN_WIDTH - 96 - (SCREEN_WIDTH - 224)), startingY };
 		App->render->DrawQuad(up, 255, 0, 0, 100, true);
+	}
+
+	if (startingY == 24 + 16)
+	{
+		App->render->Blit(graphics_top, 95, 25, &top);
+	}
+	if (startingY == 24 + 32)
+	{
+		App->render->Blit(graphics_top, 95, 25, &top1);
+	}
+	if (startingY == 24 + 48)
+	{
+		App->render->Blit(graphics_top, 95, 25, &top2);
+	}
+	if (startingY == 24 + 64)
+	{
+		App->render->Blit(graphics_top, 95, 25, &top3);
+	}
+	if (startingY == 24 + 80)
+	{
+		App->render->Blit(graphics_top, 95, 25, &top4);
+	}
+	if (startingY == 24 + 96)
+	{
+		App->render->Blit(graphics_top, 95, 25, &top5);
+	}
+	if (startingY == 24 + 112)
+	{
+		App->render->Blit(graphics_top, 95, 25, &top6);
+	}
+	if (startingY == 24 + 128)
+	{
+		App->render->Blit(graphics_top, 95, 25, &top7);
+	}
+	if (startingY == 24 + 146)
+	{
+		App->render->Blit(graphics_top, 95, 25, &top8);
+	}
+	if (startingY == 24 + 146)
+	{
+		App->render->Blit(graphics_top, 95, 25, &top9);
 	}
 
 	for (unsigned int i = 0; i < array.size(); i++)
@@ -93,6 +146,13 @@ update_status ModuleBall::Update()
 		}
 	}
 
+	if (App->input->keyboard[SDL_SCANCODE_0] == KEY_DOWN)
+	{
+		
+			App->fade->FadeToBlack(App->currentscene, (Module*)App->scene_menu);
+		
+	}
+
 	if (App->input->keyboard[SDL_SCANCODE_F1] == KEY_DOWN)
 	{
 		debug = !debug;
@@ -123,10 +183,10 @@ update_status ModuleBall::Update()
 	for (unsigned int i = 0; i < falling.size(); i++)
 	{
 		falling[i]->Move(0);
-		if (falling[i]->collidedBall)
+		/*if (falling[i]->collidedBall)
 		{
 			delete falling[i];
-		}
+		}*/
 
 		if (falling[i]->color == BLUE)
 			App->render->Blit(graphics_sprite, falling[i]->x - 8, falling[i]->y - 8, &ballsprite_blue);
@@ -535,11 +595,11 @@ void ModuleBall::DeleteFlying()
 			tmp->Shoot(90);
 			tmp->velocity = -7;
 			//score + 20
-		if (tmp->y >= (SCREEN_HEIGHT + tmp->rad))
+		/*if (tmp->y >= (SCREEN_HEIGHT + tmp->rad))
 			{
 				delete falling[i];
 				
-			}
+			}*/
 	//	if (tmp->y >= (SCREEN_HEIGHT + tmp->rad)
 			i--;
 				
@@ -553,6 +613,10 @@ bool ModuleBall::PushDown()
 {
 	startingY += 16;
 	bool ret = true;
+
+	
+
+
 	//Moving all balls down
 	for (unsigned int i = 0; i < array.size(); i++)
 	{

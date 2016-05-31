@@ -50,6 +50,7 @@ public:
 	Vector<Ball*> falling;
 
 	SDL_Texture* graphics_sprite;
+	SDL_Texture* graphics_top;
 
 	SDL_Rect ballsprite_blue;
 	SDL_Rect ballsprite_green;
@@ -59,6 +60,16 @@ public:
 	SDL_Rect ballsprite_purple;
 	SDL_Rect ballsprite_black;
 	SDL_Rect ballsprite_orange;
+	SDL_Rect top;
+	SDL_Rect top1;
+	SDL_Rect top2;
+	SDL_Rect top3;
+	SDL_Rect top4;
+	SDL_Rect top5;
+	SDL_Rect top6;
+	SDL_Rect top7;
+	SDL_Rect top8;
+	SDL_Rect top9;
 
 	int startingY = 24;
 private:
