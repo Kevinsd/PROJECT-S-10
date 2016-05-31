@@ -5,9 +5,25 @@ Puzzle Bubble it's a very amazing project created by UPC students. This game is 
 ## Usage
 
 To play this game we will use the controls A and D keys to change the direction of the arrow, which indicates the direction of the ball. To shoot the ball, we use the space bar located in the bottom of the keyboard.
+A--->Left direction
+
+D--->Right direction
+
+Space Bar--->Shot the ball
+
+Right arrow--->Next ball
+
+Left arrow--->Previous ball
+
+F1--->Active coliders
+
+0--->Lose condition
+
+L--->Next level
+
+
 
 ## History
-
 Puzzle Booble was published in June of 1994 by the Taito company. This videogame was designed by Seiichi Nakakuki.
 
 About the game's versions, we have to say that there were two different versions of the original game. In June of 1994 was published the first version of the game, only in Japan, that was able to work with Taito B System, that is a 16-bit arcade board also released by Taito company in 1988.
