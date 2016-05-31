@@ -21,13 +21,25 @@ Puzzle Bobble has a big connection with Bubble Bobble, that connection made the 
 José Rodríguez
 
 
+
+
+
 Sergi Sánchez Manzano
+
+
+
 
 
 Kevin Sánchez Díaz
 
 
+
+
+
 Joel Panicello Nieto
+
+
+
 
 
 Manav Lakhwani
