@@ -37,7 +37,7 @@ public:
 	SDL_Rect foreground;
 	SDL_Rect background;
 	Animation pipe;
-//	Animation pipe2;
+	Animation pipe2;
 	Animation left_bub;
 	Animation bub;
 	Animation bub2;

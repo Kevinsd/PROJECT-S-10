@@ -6,7 +6,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleSceneLevel.h"
 #include "ModulePlayer.h"
-#include "ModuleAudio.h"
+//#include "ModuleAudio.h"
 #include "ModuleBall.h"
 #include "ModuleInput.h"
 
@@ -37,7 +37,7 @@ bool ModuleSceneCongrat::Start()
 	graphics = App->textures->Load("Sprites and sound/Congrats.png");
 	graphics_sprite = App->textures->Load("Sprites and sound/spritespuzzle.png");
 
-	App->audio->PlayMusic("Sprites and sound/level_music.ogg", 1.0f);
+//	App->audio->PlayMusic("Sprites and sound/level_music.ogg", 1.0f);
 
 
 

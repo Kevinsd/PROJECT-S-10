@@ -37,8 +37,10 @@ public:
 	SDL_Rect foreground;
 	SDL_Rect background;
 	Animation pipe;
+	Animation left_bub;
 	//	Animation pipe2;
 	Animation bub;
+	Animation bub2;
 	Animation bub_static;
 	Animation launcher;
 	//  Throw sound

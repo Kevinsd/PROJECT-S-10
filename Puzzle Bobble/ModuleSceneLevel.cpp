@@ -26,8 +26,8 @@ ModuleSceneLevel::ModuleSceneLevel()
 	// Pipe
 
 	pipe.PushBack({338,1087,13,11});
-	pipe.PushBack({ 354, 1081, 13, 18 });
-	pipe.speed = 0.0f;
+	pipe2.PushBack({ 354, 1081, 13, 18 });
+	
 	// Background / sky
 	background.x = 0;
 	background.y = 0;
@@ -227,7 +227,7 @@ update_status ModuleSceneLevel::Update()
 	
 	// Draw everything --------------------------------------
 	App->render->Blit(graphics, 0, 0, &background);
-
+	
 
 	if (App->input->keyboard[SDL_SCANCODE_L] == KEY_DOWN || App->ball_controll->array.size()==0)
 	{
@@ -244,9 +244,9 @@ update_status ModuleSceneLevel::Update()
 	
 	launcher.speed = 0.0f;
 	App->render->Blit(graphics_sprite, 130, 192, &(launcher.GetCurrentFrame()), 0.75f); // launcher 
-	pipe.speed = 0.0f;
-	App->render->Blit(graphics_sprite, 154, 215, &(pipe.GetCurrentFrame()), 0.75f);
 
+	
+	
 	App->render->Blit(graphics_sprite, 179, 213, &(bub_static.GetCurrentFrame()), 0.75f);
 
 	//	App->render->Blit(graphics, 0, (int)foreground_pos, &foreground, 0.92f);
@@ -295,6 +295,7 @@ update_status ModuleSceneLevel::Update()
 			shoot_angle -= 1;
 		}
 	}
+	App->render->Blit(graphics_sprite, 151, 180, &arrowRect, 1.0f, 90 - shoot_angle);
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN)
 	{
@@ -302,11 +303,11 @@ update_status ModuleSceneLevel::Update()
 		{
 			if (App->ball_controll->moving_ball->moving == false)
 			{
-				left_bub.speed = 0.2f;
-				
+				left_bub.speed = 0.3f;
+				pipe.speed = 0.05;
 				App->ball_controll->ShootBall(shoot_angle);
-			pipe.speed = 0.02f;
-			App->render->Blit(graphics_sprite, 154, 215, &(pipe.GetCurrentFrame()), 0.75f);
+			
+	
 			}
 			
 		}
@@ -314,9 +315,18 @@ update_status ModuleSceneLevel::Update()
 	}
 	App->render->Blit(graphics_sprite, 136, 213, &(left_bub.GetCurrentFrame()), 0.75f);
 	
-	App->render->Blit(graphics_sprite, 151, 180, &arrowRect, 1.0f, 90-shoot_angle);
+	//App->render->Blit(graphics_sprite, 154, 215, &(pipe.GetCurrentFrame()), 0.75f);
 	App->render->Blit(graphics_sprite, 86, 209, &bag, 0.75f); // Bag 
 	App->render->Blit(graphics, 179, 213, &wheel);
+	App->render->Blit(graphics_sprite, 154, 215, &(pipe.GetCurrentFrame()), 0.75f);
+	/*if (bub2.current_frame == 0)
+	{
+		bub2.speed = 0;
+	}*/
+	if (pipe.current_frame == 0)
+	{
+		pipe.speed = 0;
+	}
 	if (left_bub.current_frame == 0)
 	{
 		left_bub.speed = 0;

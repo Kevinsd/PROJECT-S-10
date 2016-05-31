@@ -43,7 +43,7 @@ bool ModuleBall::Init()
 	top9 = { 119, 1434, 129, 157 };
 
 	graphics_sprite = App->textures->Load("Sprites and sound/spritespuzzle.png");
-	graphics_top = App->textures->Load("Sprites and sound/roof_sprites_def.png");
+	graphics_top = App->textures->Load("Sprites and sound/roof_sprites_def2.png");
 	return true;
 }
 bool ModuleBall::Start()
