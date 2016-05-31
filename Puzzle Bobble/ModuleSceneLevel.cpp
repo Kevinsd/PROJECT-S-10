@@ -136,48 +136,65 @@ bool ModuleSceneLevel::Start()
 	App->player->Enable();
 	App->ball_controll->Enable();
 
-	graphics = App->textures->Load("Sprites and sound/Level1.png");
+	graphics = App->textures->Load("Sprites and sound/Level7.png");
 	graphics_sprite = App->textures->Load("Sprites and sound/spritespuzzle.png");
 
 	App->audio->PlayMusic("Sprites and sound/level_music.ogg", 1.0f);
 
 	throw_effect = App->audio->Load_effects("Sprites and sound/throw_effect.wav");
 	
-	App->ball_controll->AddBall(0, 0, RED);
+/*	App->ball_controll->AddBall(0, 0, RED);
 	App->ball_controll->AddBall(1, 0, RED);
-	App->ball_controll->AddBall(2, 0, YELLOW);
-	App->ball_controll->AddBall(3, 0, YELLOW);
-	App->ball_controll->AddBall(4, 0, BLUE);
-	App->ball_controll->AddBall(5, 0, BLUE);
+	App->ball_controll->AddBall(2, 0, YELLOW);*/
+	App->ball_controll->AddBall(3, 0, PURPLE);
+	App->ball_controll->AddBall(4, 0, YELLOW);
+	/*App->ball_controll->AddBall(5, 0, BLUE);
 	App->ball_controll->AddBall(6, 0, GREEN);
-	App->ball_controll->AddBall(7, 0, GREEN);// Bobble level 8
+	App->ball_controll->AddBall(7, 0, GREEN);// Bobble level 7*/
 
-	App->ball_controll->AddBall(0, 1, RED);
-	App->ball_controll->AddBall(1, 1, RED);
-	App->ball_controll->AddBall(2, 1, YELLOW);
-	App->ball_controll->AddBall(3, 1, YELLOW);
-	App->ball_controll->AddBall(4, 1, BLUE);
-	App->ball_controll->AddBall(5, 1, BLUE);
-	App->ball_controll->AddBall(6, 1, GREEN); //7
+//	App->ball_controll->AddBall(0, 1, RED);
+//	App->ball_controll->AddBall(1, 1, RED);
+	App->ball_controll->AddBall(2, 1, RED);
+	App->ball_controll->AddBall(3, 1, GREEN);
+	App->ball_controll->AddBall(4, 1, YELLOW);
+//	App->ball_controll->AddBall(5, 1, BLUE);
+//	App->ball_controll->AddBall(6, 1, GREEN); //7
 
 	////
-	App->ball_controll->AddBall(0, 2, BLUE);
+	/*App->ball_controll->AddBall(0, 2, BLUE);
 	App->ball_controll->AddBall(1, 2, BLUE);
-	App->ball_controll->AddBall(2, 2, GREEN);
-	App->ball_controll->AddBall(3, 2, GREEN);
-	App->ball_controll->AddBall(4, 2, RED);
-	App->ball_controll->AddBall(5, 2, RED);
+	App->ball_controll->AddBall(2, 2, GREEN);*/
+	App->ball_controll->AddBall(3, 2, BLUE);
+	App->ball_controll->AddBall(4, 2, YELLOW);
+	/*App->ball_controll->AddBall(5, 2, RED);
 	App->ball_controll->AddBall(6, 2, YELLOW);
-	App->ball_controll->AddBall(7, 2, YELLOW);// Bobble level
+	App->ball_controll->AddBall(7, 2, YELLOW);// Bobble level*/
 
-	App->ball_controll->AddBall(0, 3, BLUE);
-	App->ball_controll->AddBall(1, 3, GREEN);
-	App->ball_controll->AddBall(2, 3, GREEN);
-	App->ball_controll->AddBall(3, 3, RED);
-	App->ball_controll->AddBall(4, 3, RED);
-	App->ball_controll->AddBall(5, 3, YELLOW);
-	App->ball_controll->AddBall(6, 3, YELLOW);
+//	App->ball_controll->AddBall(0, 3, BLUE);
+//	App->ball_controll->AddBall(1, 3, GREEN);
+	App->ball_controll->AddBall(1, 3, YELLOW);
+	App->ball_controll->AddBall(2, 3, ORANGE);
+	//App->ball_controll->AddBall(4, 3, RED);
+	App->ball_controll->AddBall(4, 3, PURPLE);
+	App->ball_controll->AddBall(5, 3, PURPLE);
 
+	//App->ball_controll->AddBall(0, 4, BLUE);
+	App->ball_controll->AddBall(1, 4, RED);
+	App->ball_controll->AddBall(2, 4, RED); 
+	App->ball_controll->AddBall(3, 4, YELLOW);
+	App->ball_controll->AddBall(4, 4, RED);
+	App->ball_controll->AddBall(5, 4, ORANGE);
+	App->ball_controll->AddBall(6, 4, PURPLE);
+	//App->ball_controll->AddBall(7, 4, YELLOW);
+
+	//App->ball_controll->AddBall(0, 4, BLUE);
+	App->ball_controll->AddBall(1, 5, ORANGE);
+	App->ball_controll->AddBall(2, 5, PURPLE);
+	//App->ball_controll->AddBall(3, 5, YELLOW);
+	App->ball_controll->AddBall(4, 5, PURPLE);
+	App->ball_controll->AddBall(5, 5, BLUE);
+	//App->ball_controll->AddBall(6, 5, PURPLE);
+	//App->ball_controll->AddBall(7, 4, YELLOW);
 
 	App->ball_controll->CreateBall();
 

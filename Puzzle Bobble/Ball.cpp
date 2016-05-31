@@ -34,6 +34,7 @@ bool Ball::Move(int top)
 		vel_x = cos(angle)*velocity;
 		x += vel_x;
 		y -= vel_y;
+		
 		App->ball_controll->Collision();
 		collidedBall = App->ball_controll->Collision();
 		if (collidedBall)

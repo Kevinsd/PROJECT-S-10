@@ -37,7 +37,7 @@ bool ModuleBall::Init()
 bool ModuleBall::Start()
 {
 	startingY = 24;
-
+	shotsNum = 0;
 	return true;
 }
 
@@ -123,6 +123,10 @@ update_status ModuleBall::Update()
 	for (unsigned int i = 0; i < falling.size(); i++)
 	{
 		falling[i]->Move(0);
+		if (falling[i]->collidedBall)
+		{
+			delete falling[i];
+		}
 
 		if (falling[i]->color == BLUE)
 			App->render->Blit(graphics_sprite, falling[i]->x - 8, falling[i]->y - 8, &ballsprite_blue);
@@ -529,9 +533,18 @@ void ModuleBall::DeleteFlying()
 			falling.push_back(tmp);
 
 			tmp->Shoot(90);
-			tmp->velocity = -5;
+			tmp->velocity = -7;
 			//score + 20
+		if (tmp->y >= (SCREEN_HEIGHT + tmp->rad))
+			{
+				delete falling[i];
+				
+			}
+	//	if (tmp->y >= (SCREEN_HEIGHT + tmp->rad)
 			i--;
+				
+			
+
 		}
 	}
 }
@@ -627,15 +640,19 @@ Ball* ModuleBall::Collision()
 {
 	for (unsigned int i = 0; i < array.size(); i++)
 	{
-		float dist_x = moving_ball->x - array[i]->x;
-		float dist_y = moving_ball->y - array[i]->y;
-		dist_x = dist_x*dist_x;
-		dist_y = dist_y*dist_y;
-		int dist_final = sqrt((float)dist_x + (float)dist_y);
-		if (moving_ball->rad + array[i]->rad >= dist_final)
+		if (moving_ball != NULL)
 		{
-			return array[i];
+				float dist_x = moving_ball->x - array[i]->x;
+				float dist_y = moving_ball->y - array[i]->y;
+				dist_x = dist_x*dist_x;
+				dist_y = dist_y*dist_y;
+				int dist_final = sqrt((float)dist_x + (float)dist_y);
+				if (moving_ball->rad + array[i]->rad >= dist_final)
+				{
+					return array[i];
+				}
 		}
+		
 	}
 	return NULL;
 }
